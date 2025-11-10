@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column min-vh-100">
     <Navbar />
-    <main class="content">
+    <main class="content flex-grow-1">
       <router-view />
     </main>
     <Footer />
@@ -11,30 +11,8 @@
 <script setup>
 import Navbar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
+import './assets/App.css'
 </script>
 
 <style>
-
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  padding-top: 90px;
-  flex: 1;
-}
-
-* {
-  font-family: 'Berkshire Swash', cursive;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #fffafc;
-  color: #333;
-}
 </style>
