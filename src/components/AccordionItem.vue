@@ -17,12 +17,6 @@
 </template>
 
 <script setup>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faChevronDown, faChevronUp)
-
 defineProps({
   question: String,
   answer: String,

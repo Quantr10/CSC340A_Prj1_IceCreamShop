@@ -12,6 +12,9 @@ import {
   faPhone,
   faEnvelope,
   faStar,
+  faArrowRight,
+  faChevronDown,
+  faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -29,7 +32,10 @@ library.add(
   faFacebookF,
   faInstagram,
   faTwitter,
-  faStar
+  faStar,
+  faArrowRight,
+  faChevronDown,
+  faChevronUp
 );
 
 const app = createApp(App);

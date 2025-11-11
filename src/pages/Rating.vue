@@ -82,6 +82,7 @@ import "../assets/Rating.css";
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { menuItems } from "../data/menuItems.js";
+import { getRating, submitRating as submitRatingService } from "../utils/ratingService.js";
 
 const route = useRoute();
 const router = useRouter();
@@ -93,14 +94,10 @@ const item = menuItems.find((i) => i.name === name);
 const image = ref(route.query.image || item?.image);
 const price = route.query.price || item?.price || "—";
 
-const storedData = JSON.parse(localStorage.getItem("ratings") || "{}");
-const current = storedData[name] || {
-  avg: Number(item?.rating || 5),
-  count: 0,
-  total: 0,
-};
+const defaultRating = Number(item?.rating || 5);
+const current = getRating(name, defaultRating);
 
-const avgRating = computed(() => current.avg || 5);
+const avgRating = computed(() => current.avg || defaultRating);
 
 const firstName = ref("");
 const lastName = ref("");
@@ -118,22 +115,18 @@ function submitRating() {
     return;
   }
 
-  const allRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
-  const current = allRatings[name] || { total: 0, count: 0, reviews: [] };
-
-  current.total += rating.value;
-  current.count += 1;
-  current.avg = current.total / current.count;
-  current.reviews.push({
-    user: `${firstName.value || "Anonymous"} ${lastName.value || ""}`.trim(),
-    stars: rating.value,
-    text: review.value,
-  });
-
-  allRatings[name] = current;
-  localStorage.setItem("ratings", JSON.stringify(allRatings));
-
-  hasRated.value = true;
-  setTimeout(() => router.push("/menu"), 2000);
+  try {
+    submitRatingService(
+      name,
+      rating.value,
+      firstName.value,
+      lastName.value,
+      review.value
+    );
+    hasRated.value = true;
+    setTimeout(() => router.push("/menu"), 2000);
+  } catch (error) {
+    alert(error.message || "Failed to submit rating. Please try again.");
+  }
 }
 </script>
