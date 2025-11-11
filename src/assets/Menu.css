@@ -2,6 +2,7 @@
   background-color: #fff;
 }
 
+/* ===== Header ===== */
 .menu-header {
   background: linear-gradient(135deg, hotpink, rgba(104, 50, 146, 1));
   padding: 3rem 0;
@@ -14,20 +15,20 @@
   margin: 0;
 }
 
+/* ===== Container ===== */
 .menu-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 0;
-
 }
 
+/* ===== Card ===== */
 .menu-card {
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: white;
-  max-width: 260px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .menu-card:hover {
@@ -35,76 +36,77 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* ===== Image ===== */
 .menu-img {
-  height: 140px;
+  width: 100%;
+  height: 180px;
   object-fit: cover;
+  display: block;
 }
 
+/* ===== Text ===== */
 .menu-name {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #2b0939;
+  color: black;
+  margin-bottom: 0.5rem;
   line-height: 1.3;
 }
 
 .menu-rating {
   color: #777;
   font-size: 0.8rem;
+  margin-bottom: 0.25rem;
 }
 
 .menu-price {
   font-weight: bold;
   font-size: 0.9rem;
-  color: #682f92;
+  color: rgba(104, 50, 146, 1);
+  margin-bottom: 0.75rem;
 }
 
+/* ===== Button ===== */
 .menu-btn {
   background: hotpink;
-  color: white;
+  color: #fff;
   border-radius: 25px;
   border: none;
-  transition: all 0.3s ease;
   font-size: 0.85rem;
   padding: 0.5rem 1.5rem;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .menu-btn:hover {
-  background: hotpink;
-  color: white;
   transform: scale(1.05);
+  background: #ff1493;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .menu-container {
-    padding: 0 1rem;
-  }
-  
-  .menu-card {
-    max-width: 220px;
-  }
-}
-
-@media (max-width: 500px) {
-  .menu-title {
-    font-size: 2rem;
+    padding: 1rem;
   }
 
   .menu-img {
     height: 120px;
   }
 
-  .menu-container {
-    padding: 0 0.5rem;
-  }
-  
-  .menu-card {
-    max-width: 180px;
-  }
-  
   .menu-name {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
-  
+}
+
+@media (max-width: 576px) {
+  .menu-title {
+    font-size: 2rem;
+  }
+
+  .menu-img {
+    height: 100px;
+  }
+
   .menu-btn {
     font-size: 0.75rem;
     padding: 0.4rem 1rem;
