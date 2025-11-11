@@ -2,7 +2,6 @@
   background-color: #fff;
 }
 
-/* ===== Header ===== */
 .menu-header {
   background: linear-gradient(135deg, hotpink, rgba(104, 50, 146, 1));
   padding: 3rem 0;
@@ -15,14 +14,12 @@
   margin: 0;
 }
 
-/* ===== Container ===== */
 .menu-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 0;
 }
 
-/* ===== Card ===== */
 .menu-card {
   background: #fff;
   border-radius: 12px;
@@ -36,7 +33,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Image ===== */
 .menu-img {
   width: 100%;
   height: 180px;
@@ -44,7 +40,6 @@
   display: block;
 }
 
-/* ===== Text ===== */
 .menu-name {
   font-size: 0.9rem;
   font-weight: 600;
@@ -66,7 +61,6 @@
   margin-bottom: 0.75rem;
 }
 
-/* ===== Button ===== */
 .menu-btn {
   background: hotpink;
   color: #fff;
@@ -80,10 +74,8 @@
 
 .menu-btn:hover {
   transform: scale(1.05);
-  background: #ff1493;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .menu-container {
     padding: 1rem;
