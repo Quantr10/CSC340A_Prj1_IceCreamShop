@@ -1,13 +1,14 @@
 <template>
-  <footer class="footer">
-    <div class="footer-content">
-      <!-- Brand Section -->
-      <div class="footer-section brand-section">
-        <router-link to="/" class="footer-logo">Ice Cream Name</router-link>
-        <p class="footer-desc">
-          Sweetness in every scoop. Crafted with love and smiles since 2023.
-        </p>
-      </div>
+  <footer class="footer text-white py-4">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Brand Section -->
+        <div class="col-lg-3 col-md-6">
+          <router-link to="/" class="footer-logo d-block mb-3">Ice Cream Name</router-link>
+          <p class="footer-desc">
+            Sweetness in every scoop. Crafted with love and smiles since 2023.
+          </p>
+        </div>
 
       <!-- Navigation Section -->
       <div class="footer-section nav-section">

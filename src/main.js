@@ -8,7 +8,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 // Solid icons
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-// ✅ BRAND ICONS (these are required for facebook, instagram, twitter)
 import { faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 // Vue Font Awesome component

@@ -1,0 +1,36 @@
+.logo {
+  font-family: 'Berkshire Swash', cursive !important;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: black;
+  text-decoration: none;
+  background: transparent;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+
+.logo:hover {
+  color: hotpink;
+}
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+  background: transparent;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: hotpink;
+}
+
+.nav-link.active {
+  color: hotpink;
+  border-bottom: 2px solid hotpink;
+}
+
