@@ -1,0 +1,18 @@
+.menu-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.star-icon {
+  color: gold;
+  font-size: 1rem;
+}
+
+.rating-number {
+  font-weight: 600;
+  color: gold;
+  font-size: 0.9rem;
+}
