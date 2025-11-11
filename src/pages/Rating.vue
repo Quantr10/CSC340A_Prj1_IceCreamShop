@@ -1,5 +1,6 @@
 <template>
   <div class="rating-page">
+
     <div class="rating-header text-center">
       <h1 class="rating-title">Rating</h1>
     </div>
@@ -62,73 +63,92 @@
         </div>
 
         <div class="d-flex gap-3 mb-3">
-          <input v-model="firstName" placeholder="First Name" class="form-control rounded-pill" />
-          <input v-model="lastName" placeholder="Last Name" class="form-control rounded-pill" />
+          <div class="flex-grow-1 text-start">
+            <label for="firstName" class="form-label fw-semibold small">First Name</label>
+            <input
+              v-model="firstName"
+              id="firstName"
+              class="form-control"
+            />
+          </div>
+          <div class="flex-grow-1 text-start">
+            <label for="lastName" class="form-label fw-semibold small">Last Name</label>
+            <input
+              v-model="lastName"
+              id="lastName"
+              class="form-control"
+            />
+          </div>
         </div>
 
-        <textarea
-          v-model="review"
-          placeholder="Write your review here..."
-          class="form-control rounded mb-4"
-          rows="4"
-        ></textarea>
+        <div class="text-start mb-4">
+          <label for="review" class="form-label fw-semibold small">Write your review</label>
+          <textarea
+            v-model="review"
+            id="review"
+            class="form-control"
+            rows="4"
+          ></textarea>
+        </div>
 
-        <button class="submit-btn btn w-100" @click="submitRating">Submit Now</button>
+        <button class="submit-btn w-100" @click="submitRating">Submit Now</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import "../assets/Rating.css";
-import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { menuItems } from "../data/menuItems.js";
-import { getRating, submitRating as submitRatingService } from "../utils/ratingService.js";
+import "../assets/Rating.css"
+import { ref, computed } from "vue"
+import { useRoute, useRouter } from "vue-router"
+import { menuItems } from "../data/menuItems.js"
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const name = route.params.name;
+const name = route.params.name
+const item = menuItems.find((i) => i.name === name)
 
-const item = menuItems.find((i) => i.name === name);
+const image = ref(route.query.image || item?.image)
+const price = route.query.price || item?.price || "—"
 
-const image = ref(route.query.image || item?.image);
-const price = route.query.price || item?.price || "—";
+const storedData = JSON.parse(localStorage.getItem("ratings") || "{}")
+const current = storedData[name] || { avg: Number(item?.rating || 5), count: 0, total: 0 }
 
-const defaultRating = Number(item?.rating || 5);
-const current = getRating(name, defaultRating);
+const avgRating = computed(() => current.avg || 5)
 
-const avgRating = computed(() => current.avg || defaultRating);
-
-const firstName = ref("");
-const lastName = ref("");
-const rating = ref(0);
-const review = ref("");
-const hasRated = ref(false);
+const firstName = ref("")
+const lastName = ref("")
+const rating = ref(0)
+const review = ref("")
+const hasRated = ref(false)
 
 function setRating(n) {
-  rating.value = n;
+  rating.value = n
 }
 
 function submitRating() {
   if (rating.value === 0) {
-    alert("Please select a rating");
-    return;
+    alert("Please select a rating")
+    return
   }
 
-  try {
-    submitRatingService(
-      name,
-      rating.value,
-      firstName.value,
-      lastName.value,
-      review.value
-    );
-    hasRated.value = true;
-    setTimeout(() => router.push("/menu"), 2000);
-  } catch (error) {
-    alert(error.message || "Failed to submit rating. Please try again.");
-  }
+  const allRatings = JSON.parse(localStorage.getItem("ratings") || "{}")
+  const current = allRatings[name] || { total: 0, count: 0, reviews: [] }
+
+  current.total += rating.value
+  current.count += 1
+  current.avg = current.total / current.count
+  current.reviews.push({
+    user: `${firstName.value || "Anonymous"} ${lastName.value || ""}`.trim(),
+    stars: rating.value,
+    text: review.value,
+  })
+
+  allRatings[name] = current
+  localStorage.setItem("ratings", JSON.stringify(allRatings))
+
+  hasRated.value = true
+  setTimeout(() => router.push("/menu"), 2000)
 }
 </script>

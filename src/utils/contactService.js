@@ -58,7 +58,6 @@ export function validateContactForm(formData) {
  * @returns {Promise<Object>} Submission result
  */
 export async function submitContactForm(formData) {
-  // Validate form data
   const validation = validateContactForm(formData);
   if (!validation.isValid) {
     throw new Error(validation.errors[Object.keys(validation.errors)[0]]);

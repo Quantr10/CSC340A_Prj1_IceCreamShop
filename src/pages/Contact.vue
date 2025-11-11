@@ -5,16 +5,6 @@
     </div>
 
     <div class="container py-5 px-3">
-      <!-- Breadcrumb -->
-      <nav class="mb-4 mt-4">
-        <div class="d-inline-flex align-items-center bg-light rounded-pill px-3 py-2 small">
-          <router-link to="/" class="breadcrumb-link text-decoration-none fw-medium">Home</router-link>
-          <span class="mx-2 text-muted">/</span>
-          <span class="breadcrumb-current fw-medium">Contact Us</span>
-        </div>
-      </nav>
-
-      <!-- Main Heading -->
       <div class="text-center mb-5">
         <h2 class="display-4 fw-bold mb-3">
           Get in <span class="highlight">Touch</span> With Us
@@ -24,9 +14,7 @@
         </p>
       </div>
 
-      <!-- Two Column Layout -->
       <div class="row g-4">
-        <!-- Left Column: Contact Information -->
         <div class="col-lg-6">
           <div class="contact-info-card d-flex align-items-start bg-light rounded-3 p-4 mb-3">
             <div class="contact-icon-wrapper flex-shrink-0 me-3">
@@ -71,7 +59,6 @@
           </div>
         </div>
 
-        <!-- Right Column: Contact Form -->
         <div class="col-lg-6">
           <form class="bg-white rounded-3 p-4" @submit.prevent="handleSubmit">
             <div class="mb-3">
@@ -129,7 +116,7 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn hero-cta-btn w-100 d-inline-flex align-items-center justify-content-center">
+            <button type="submit" class="submit-btn w-100">
               Submit Now
               <font-awesome-icon icon="arrow-right" class="ms-2" />
             </button>
@@ -158,7 +145,7 @@ async function handleSubmit() {
   try {
     const result = await submitContactForm(form.value)
     alert(result.message)
-    // Reset form
+
     form.value = {
       firstName: '',
       lastName: '',

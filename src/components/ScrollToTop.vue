@@ -20,11 +20,9 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-// Watch for route changes to reset scroll position
 watch(
   () => route.path,
   () => {
-    // Reset scroll position on route change
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 );
