@@ -24,7 +24,7 @@
                 ⭐ {{ item.rating }}/5
               </p>
               <p class="menu-price mb-2">${{ item.price }}</p>
-              <button class="btn menu-btn px-4 py-2">Rate This</button>
+              <button class="menu-btn px-4 py-2">Rate This</button>
             </div>
           </div>
         </div>
