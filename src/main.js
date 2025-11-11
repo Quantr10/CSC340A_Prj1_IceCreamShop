@@ -13,6 +13,7 @@ import {
   faEnvelope,
   faStar,
   faArrowRight,
+  faArrowUp,
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +35,7 @@ library.add(
   faTwitter,
   faStar,
   faArrowRight,
+  faArrowUp,
   faChevronDown,
   faChevronUp
 );

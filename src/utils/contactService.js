@@ -64,8 +64,7 @@ export async function submitContactForm(formData) {
     throw new Error(validation.errors[Object.keys(validation.errors)[0]]);
   }
   
-  // In a real application, this would make an API call
-  // For now, we'll simulate a successful submission
+ 
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
