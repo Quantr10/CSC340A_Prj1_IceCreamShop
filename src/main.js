@@ -2,6 +2,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
+// Bootstrap JS (optional, for interactive components)
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
 // Font Awesome Core
 import { library } from '@fortawesome/fontawesome-svg-core'
 

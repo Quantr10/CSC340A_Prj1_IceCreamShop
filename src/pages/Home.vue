@@ -1,12 +1,12 @@
 <template>
-  <div class="page">
-    <h2>Welcome to Ice Cream Name</h2>
+  <div class="page container text-center mt-5">
+    <h2 class="mb-4">Welcome to Ice Cream Name</h2>
   </div>
 </template>
 
+<script setup>
+import '../assets/Home.css'
+</script>
+
 <style scoped>
-.page {
-  text-align: center;
-  margin-top: 3rem;
-}
 </style>

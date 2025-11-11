@@ -1,0 +1,81 @@
+.footer {
+  background: rgba(104, 50, 146, 1) !important;
+}
+
+.footer-logo {
+  font-family: "Berkshire Swash", cursive;
+  font-size: 1.6rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-desc {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+  font-size: 0.95rem;
+  max-width: 280px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #fff;
+  line-height: 1.6rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: hotpink;
+}
+
+.contact-item {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+}
+
+.contact-icon {
+  width: 14px;
+  color: hotpink;
+  flex-shrink: 0;
+}
+
+.social-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  font-size: 0.95rem;
+}
+
+.social-link:hover {
+  background: hotpink;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
