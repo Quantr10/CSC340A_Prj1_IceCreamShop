@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-primary text-white py-4">
+  <footer class="footer text-white py-4">
     <div class="container">
       <div class="row g-4">
         <!-- Brand Section -->
