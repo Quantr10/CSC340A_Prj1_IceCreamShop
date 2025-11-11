@@ -129,7 +129,7 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn submit-btn w-100 d-inline-flex align-items-center justify-content-center">
+            <button type="submit" class="btn hero-cta-btn w-100 d-inline-flex align-items-center justify-content-center">
               Submit Now
               <font-awesome-icon icon="arrow-right" class="ms-2" />
             </button>

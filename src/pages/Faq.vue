@@ -23,7 +23,7 @@
       <div class="contact-box text-center mt-5 p-4 rounded-3">
         <h3 class="contact-title h4 mb-2">Still have questions?</h3>
         <p class="contact-text mb-3">We'd love to help! Reach out to us anytime.</p>
-        <button class="contact-btn btn" @click="goToContact">
+        <button class="btn hero-cta-btn" @click="goToContact">
           Contact Us
         </button>
       </div>
