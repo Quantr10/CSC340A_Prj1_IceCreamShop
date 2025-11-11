@@ -11,21 +11,12 @@
           :key="index"
           class="col-md-8"
         >
-          <div class="faq-card shadow-sm border-0">
-            <div class="faq-question" @click="toggle(index)">
-              <span>{{ faq.q }}</span>
-              <font-awesome-icon
-                :icon="openIndex === index ? 'chevron-up' : 'chevron-down'"
-                class="arrow"
-              />
-            </div>
-
-            <transition name="slide-fade">
-              <div v-if="openIndex === index" class="faq-answer">
-                <p>{{ faq.a }}</p>
-              </div>
-            </transition>
-          </div>
+          <AccordionItem
+            :question="faq.q"
+            :answer="faq.a"
+            :isOpen="openIndex === index"
+            @toggle="toggle(index)"
+          />
         </div>
       </div>
 
@@ -42,13 +33,9 @@
 
 <script setup>
 import '../assets/FAQ.css'
+import AccordionItem from '../components/AccordionItem.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faChevronDown, faChevronUp)
 
 const router = useRouter()
 const openIndex = ref(null)
