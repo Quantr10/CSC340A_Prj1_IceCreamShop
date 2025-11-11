@@ -19,6 +19,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { computed } from "vue";
+import { getAverageRating } from "../utils/ratingService.js";
 import "../assets/IceCreamCard.css";
 
 const router = useRouter();
@@ -31,9 +32,7 @@ const props = defineProps({
 });
 
 const computedRating = computed(() => {
-  const stored = JSON.parse(localStorage.getItem("ratings") || "{}");
-  const data = stored[props.name];
-  return data ? data.avg.toFixed(1) : props.rating;
+  return getAverageRating(props.name, props.rating);
 });
 
 const onRate = () => {

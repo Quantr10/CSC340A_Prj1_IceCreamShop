@@ -1,5 +1,462 @@
-.page {
-  text-align: center;
-  margin-top: 3rem;
+.home-page {
+  background-color: #ffffff;
+  color: #3b2f4a;
+  overflow-x: hidden;
+}
+
+.hero-section {
+  background: radial-gradient(circle at top left, #ff6bc1, #4c1f7a 45%, #31174f 90%);
+  color: #fff;
+  position: relative;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  overflow: hidden;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: -120px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.hero-discount-badge {
+  position: absolute;
+  top: -35px;
+  right: 35px;
+  width: 110px;
+  height: 110px;
+  background: #ffbb28;
+  color: #381546;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 20px 45px rgba(56, 21, 70, 0.25);
+  z-index: 3;
+}
+
+.hero-discount-badge strong {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.hero-discount-badge small {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero-text {
+  font-size: 1.05rem;
+  max-width: 470px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-cta-btn {
+  background: linear-gradient(135deg, #ff5fa6, #ff3778);
+  border: none;
+  color: #fff !important;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 12px 30px rgba(255, 95, 166, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(255, 95, 166, 0.5);
+}
+
+.hero-cta-secondary {
+  border-radius: 999px;
+  font-weight: 600;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.hero-cta-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.hero-images {
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  padding: 2.5rem 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.hero-images img {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+.hero-main {
+  max-width: 280px;
+  z-index: 2;
+  filter: drop-shadow(0 24px 45px rgba(17, 10, 45, 0.35));
+}
+
+.hero-secondary {
+  position: absolute;
+  top: -15px;
+  right: -45px;
+  max-width: 240px;
+  transform: rotate(9deg);
+  filter: drop-shadow(0 20px 40px rgba(17, 10, 45, 0.25));
+  z-index: 1;
+}
+
+.hero-extra {
+  position: absolute;
+  bottom: -45px;
+  left: 10px;
+  max-width: 230px;
+  filter: drop-shadow(0 18px 35px rgba(17, 10, 45, 0.3));
+  z-index: 3;
+}
+
+.hero-curved-line {
+  position: absolute;
+  top: 25px;
+  right: 115px;
+  width: 150px;
+  height: 95px;
+  border-top: 2px dashed rgba(255, 255, 255, 0.7);
+  border-right: 2px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 120px 120px 0 0;
+  transform: rotate(-12deg);
+  z-index: 1;
+}
+
+.hero-curved-line::after {
+  content: "";
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 12px;
+  height: 12px;
+  background: #ff5fa6;
+  border-radius: 50%;
+}
+
+.hero-decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-decoration-left {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  left: -110px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0.5;
+}
+
+.hero-decoration-right {
+  width: 200px;
+  height: 200px;
+  bottom: -70px;
+  right: 60px;
+  border-radius: 45px;
+  background: linear-gradient(135deg, rgba(255, 129, 187, 0.35), rgba(98, 47, 147, 0.35));
+}
+
+.hero-dots {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 20%, transparent 21%);
+  background-size: 12px 12px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-dots-one {
+  top: 55%;
+  left: 60px;
+}
+
+.hero-dots-two {
+  top: 35%;
+  right: 120px;
+}
+
+.section-header {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #31224d;
+}
+
+.section-subtitle {
+  color: #6c5d89;
+  margin-bottom: 0;
+}
+
+.highlight {
+  color: #ff3790;
+}
+
+.popular-section {
+  background: #ffffff;
+  position: relative;
+}
+
+.popular-section::before,
+.best-section::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -80px;
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(135deg, rgba(255, 87, 157, 0.25), rgba(99, 48, 150, 0.25));
+  border-radius: 40px;
+  filter: blur(0.5px);
+  z-index: 0;
+}
+
+.position-relative > .row {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(54, 24, 94, 0.15);
+  color: #6d3bbf;
+  font-size: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  opacity: 0.7;
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.7;
+}
+
+.arrow-left {
+  left: -24px;
+}
+
+.arrow-right {
+  right: -24px;
+}
+
+.guilt-free-section {
+  background: linear-gradient(135deg, #ffe9f4, #f4f0ff);
+  border-radius: 48px;
+  margin: 0 1rem;
+  position: relative;
+}
+
+.guilt-free-section::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 45%;
+  width: 70px;
+  height: 70px;
+  border: 3px dashed rgba(255, 87, 157, 0.4);
+  border-radius: 50%;
+}
+
+.feature-list li {
+  font-weight: 600;
+  color: #4f3c72;
+  margin-bottom: 0.5rem;
+}
+
+.best-section {
+  background: #ffffff;
+  position: relative;
+}
+
+.testimonial-section {
+  background: linear-gradient(180deg, #f7f3ff 0%, #ffeef7 100%);
+}
+
+.testimonial-card {
+  background: #ffffff;
+  border-radius: 36px;
+  box-shadow: 0 20px 45px rgba(66, 29, 112, 0.1);
+}
+
+.testimonial-quote {
+  font-style: italic;
+  color: #5b4c7a;
+  line-height: 1.6;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  color: #3c2e5c;
+}
+
+.testimonial-role {
+  color: #8c7aaa;
+  font-size: 0.95rem;
+}
+
+.stars .star-icon {
+  color: #ffb433;
+  font-size: 1.1rem;
+}
+
+.avatar-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.avatar-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 20px rgba(44, 23, 88, 0.15);
+}
+
+@media (max-width: 992px) {
+  .hero-images {
+    max-width: 320px;
+    padding: 2rem 1rem 1rem;
+  }
+
+  .hero-main {
+    max-width: 240px;
+  }
+
+  .hero-secondary {
+    top: -20px;
+    right: -10px;
+    max-width: 180px;
+  }
+
+  .hero-extra {
+    bottom: -35px;
+    left: 0;
+    max-width: 180px;
+  }
+
+  .hero-discount-badge {
+    width: 90px;
+    height: 90px;
+    top: -25px;
+    right: 10px;
+  }
+
+  .hero-curved-line {
+    right: 80px;
+    width: 120px;
+    height: 80px;
+  }
+
+  .hero-dots-one {
+    left: 20px;
+  }
+
+  .hero-dots-two {
+    right: 40px;
+  }
+
+  .guilt-free-section {
+    border-radius: 36px;
+    margin: 0;
+  }
+
+  .carousel-arrow {
+    display: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+
+  .hero-images {
+    max-width: 280px;
+  }
+
+  .hero-main {
+    max-width: 210px;
+  }
+
+  .hero-secondary {
+    top: -5px;
+    right: -5px;
+    max-width: 150px;
+  }
+
+  .hero-extra {
+    bottom: -25px;
+    left: 10px;
+    max-width: 150px;
+  }
+
+  .hero-discount-badge {
+    width: 80px;
+    height: 80px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-text {
+    font-size: 0.95rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .testimonial-card {
+    padding: 2.5rem !important;
+  }
+
+  .avatar-img {
+    width: 48px;
+    height: 48px;
+  }
 }
 
