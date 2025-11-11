@@ -4,22 +4,22 @@
       <h1 class="contact-title">Contact Us</h1>
     </div>
 
-    <div class="container contact-container">
+    <div class="container py-5 px-3">
       <!-- Breadcrumb -->
-      <nav class="breadcrumb-nav mb-4">
-        <div class="breadcrumb-wrapper">
-          <router-link to="/" class="breadcrumb-link">Home</router-link>
-          <span class="breadcrumb-separator">/</span>
-          <span class="breadcrumb-current">Contact Us</span>
+      <nav class="mb-4 mt-4">
+        <div class="d-inline-flex align-items-center bg-light rounded-pill px-3 py-2 small">
+          <router-link to="/" class="breadcrumb-link text-decoration-none fw-medium">Home</router-link>
+          <span class="mx-2 text-muted">/</span>
+          <span class="breadcrumb-current fw-medium">Contact Us</span>
         </div>
       </nav>
 
       <!-- Main Heading -->
       <div class="text-center mb-5">
-        <h2 class="main-heading">
+        <h2 class="display-4 fw-bold mb-3">
           Get in <span class="highlight">Touch</span> With Us
         </h2>
-        <p class="subtitle">
+        <p class="lead text-muted mb-0">
           Reach out and connect with us today for any inquiries or assistance!
         </p>
       </div>
@@ -28,42 +28,42 @@
       <div class="row g-4">
         <!-- Left Column: Contact Information -->
         <div class="col-lg-6">
-          <div class="contact-info-card mb-3">
-            <div class="contact-icon-wrapper">
-              <font-awesome-icon :icon="contactInfo.location.icon" class="contact-icon" />
+          <div class="contact-info-card d-flex align-items-start bg-light rounded-3 p-4 mb-3">
+            <div class="contact-icon-wrapper flex-shrink-0 me-3">
+              <font-awesome-icon :icon="contactInfo.location.icon" class="contact-icon text-white" />
             </div>
-            <div class="contact-info-content">
-              <h3 class="contact-info-title">{{ contactInfo.location.title }}</h3>
-              <p class="contact-info-text">{{ contactInfo.location.address }}</p>
+            <div class="flex-grow-1">
+              <h3 class="h5 fw-bold mb-2">{{ contactInfo.location.title }}</h3>
+              <p class="contact-info-text mb-0 small text-muted">{{ contactInfo.location.address }}</p>
             </div>
           </div>
 
-          <div class="contact-info-card mb-3">
-            <div class="contact-icon-wrapper">
-              <font-awesome-icon :icon="contactInfo.phone.icon" class="contact-icon" />
+          <div class="contact-info-card d-flex align-items-start bg-light rounded-3 p-4 mb-3">
+            <div class="contact-icon-wrapper flex-shrink-0 me-3">
+              <font-awesome-icon :icon="contactInfo.phone.icon" class="contact-icon text-white" />
             </div>
-            <div class="contact-info-content">
-              <h3 class="contact-info-title">{{ contactInfo.phone.title }}</h3>
+            <div class="flex-grow-1">
+              <h3 class="h5 fw-bold mb-2">{{ contactInfo.phone.title }}</h3>
               <p 
                 v-for="(number, index) in contactInfo.phone.numbers" 
                 :key="index" 
-                class="contact-info-text"
+                class="contact-info-text mb-1 small text-muted"
               >
                 {{ number }}
               </p>
             </div>
           </div>
 
-          <div class="contact-info-card">
-            <div class="contact-icon-wrapper">
-              <font-awesome-icon :icon="contactInfo.email.icon" class="contact-icon" />
+          <div class="contact-info-card d-flex align-items-start bg-light rounded-3 p-4">
+            <div class="contact-icon-wrapper flex-shrink-0 me-3">
+              <font-awesome-icon :icon="contactInfo.email.icon" class="contact-icon text-white" />
             </div>
-            <div class="contact-info-content">
-              <h3 class="contact-info-title">{{ contactInfo.email.title }}</h3>
+            <div class="flex-grow-1">
+              <h3 class="h5 fw-bold mb-2">{{ contactInfo.email.title }}</h3>
               <p 
                 v-for="(email, index) in contactInfo.email.emails" 
                 :key="index" 
-                class="contact-info-text"
+                class="contact-info-text mb-1 small text-muted"
               >
                 {{ email }}
               </p>
@@ -73,9 +73,9 @@
 
         <!-- Right Column: Contact Form -->
         <div class="col-lg-6">
-          <form class="contact-form" @submit.prevent="handleSubmit">
-            <div class="form-group mb-3">
-              <label for="firstName" class="form-label">First Name</label>
+          <form class="bg-white rounded-3 p-4" @submit.prevent="handleSubmit">
+            <div class="mb-3">
+              <label for="firstName" class="form-label fw-semibold small">First Name</label>
               <input
                 type="text"
                 id="firstName"
@@ -85,8 +85,8 @@
               />
             </div>
 
-            <div class="form-group mb-3">
-              <label for="lastName" class="form-label">Last Name</label>
+            <div class="mb-3">
+              <label for="lastName" class="form-label fw-semibold small">Last Name</label>
               <input
                 type="text"
                 id="lastName"
@@ -96,8 +96,8 @@
               />
             </div>
 
-            <div class="form-group mb-3">
-              <label for="email" class="form-label">Email address</label>
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold small">Email address</label>
               <input
                 type="email"
                 id="email"
@@ -107,8 +107,8 @@
               />
             </div>
 
-            <div class="form-group mb-3">
-              <label for="phone" class="form-label">Phone</label>
+            <div class="mb-3">
+              <label for="phone" class="form-label fw-semibold small">Phone</label>
               <input
                 type="tel"
                 id="phone"
@@ -118,8 +118,8 @@
               />
             </div>
 
-            <div class="form-group mb-4">
-              <label for="message" class="form-label">Message</label>
+            <div class="mb-4">
+              <label for="message" class="form-label fw-semibold small">Message</label>
               <textarea
                 id="message"
                 v-model="form.message"
@@ -129,7 +129,7 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="btn submit-btn w-100 d-inline-flex align-items-center justify-content-center">
               Submit Now
               <font-awesome-icon icon="arrow-right" class="ms-2" />
             </button>

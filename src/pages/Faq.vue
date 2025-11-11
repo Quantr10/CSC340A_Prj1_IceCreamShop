@@ -4,7 +4,7 @@
       <h1 class="faq-title">Frequently Asked Questions</h1>
     </div>
 
-    <div class="container my-4 faq-container">
+    <div class="container my-4 py-5">
       <div class="row g-4 justify-content-center">
         <div
           v-for="(faq, index) in faqs"
@@ -20,10 +20,10 @@
         </div>
       </div>
 
-      <div class="contact-box text-center mt-5">
-        <h3 class="contact-title">Still have questions?</h3>
-        <p class="contact-text">We’d love to help! Reach out to us anytime.</p>
-        <button class="contact-btn" @click="goToContact">
+      <div class="contact-box text-center mt-5 p-4 rounded-3">
+        <h3 class="contact-title h4 mb-2">Still have questions?</h3>
+        <p class="contact-text mb-3">We'd love to help! Reach out to us anytime.</p>
+        <button class="contact-btn btn" @click="goToContact">
           Contact Us
         </button>
       </div>

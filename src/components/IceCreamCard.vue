@@ -5,7 +5,7 @@
     <div class="card-body text-center d-flex flex-column">
       <h5 class="card-title menu-name">{{ name }}</h5>
 
-      <div class="menu-stars">
+      <div class="menu-stars d-flex align-items-center justify-content-center mb-2">
         <font-awesome-icon icon="star" class="star-icon" />
         <span class="rating-number">{{ computedRating }}/5</span>
       </div>

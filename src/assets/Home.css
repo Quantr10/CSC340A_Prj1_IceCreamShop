@@ -63,8 +63,6 @@
 .hero-text {
   font-size: 1.05rem;
   max-width: 470px;
-  margin-left: auto;
-  margin-right: auto;
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -207,20 +205,8 @@
   right: 120px;
 }
 
-.section-header {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
 .section-title {
-  font-size: 2.1rem;
-  font-weight: 700;
   color: #31224d;
-}
-
-.section-subtitle {
-  color: #6c5d89;
-  margin-bottom: 0;
 }
 
 .highlight {
@@ -299,11 +285,6 @@
   border-radius: 50%;
 }
 
-.feature-list li {
-  font-weight: 600;
-  color: #4f3c72;
-  margin-bottom: 0.5rem;
-}
 
 .best-section {
   background: #ffffff;
@@ -315,45 +296,7 @@
 }
 
 .testimonial-card {
-  background: #ffffff;
-  border-radius: 36px;
   box-shadow: 0 20px 45px rgba(66, 29, 112, 0.1);
-}
-
-.testimonial-quote {
-  font-style: italic;
-  color: #5b4c7a;
-  line-height: 1.6;
-}
-
-.testimonial-name {
-  font-weight: 700;
-  color: #3c2e5c;
-}
-
-.testimonial-role {
-  color: #8c7aaa;
-  font-size: 0.95rem;
-}
-
-.stars .star-icon {
-  color: #ffb433;
-  font-size: 1.1rem;
-}
-
-.avatar-group {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.avatar-img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 20px rgba(44, 23, 88, 0.15);
 }
 
 @media (max-width: 992px) {
@@ -452,11 +395,6 @@
 
   .testimonial-card {
     padding: 2.5rem !important;
-  }
-
-  .avatar-img {
-    width: 48px;
-    height: 48px;
   }
 }
 

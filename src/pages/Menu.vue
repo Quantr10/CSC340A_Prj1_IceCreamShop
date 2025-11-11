@@ -4,8 +4,8 @@
       <h1 class="menu-title">Menu</h1>
     </div>
 
-    <div class="container menu-container">
-      <div class="row justify-content-center">
+    <div class="container py-5">
+      <div class="row justify-content-center g-4">
         <div
           class="col-md-4 col-sm-6"
           v-for="item in menuItems"
