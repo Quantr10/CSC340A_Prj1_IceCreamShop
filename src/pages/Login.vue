@@ -23,7 +23,7 @@
         <div class="mb-3">
           <div class="d-flex justify-content-between align-items-center mb-1">
             <label class="form-label mb-0">Password</label>
-            <a href="#" class="small text-primary text-decoration-none">forgot password</a>
+            
           </div>
           <input 
             v-model="password" 
@@ -32,6 +32,7 @@
             placeholder="Enter your password" 
             required 
           />
+          <a href="#" class="small text-primary text-decoration-none">forgot password</a>
         </div>
 
         <div class="mb-4 form-check">

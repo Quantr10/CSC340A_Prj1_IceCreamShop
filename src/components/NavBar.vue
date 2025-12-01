@@ -22,17 +22,17 @@
           
           <!-- Auth Links -->
           <template v-if="!currentUser">
-            <li class="nav-item ms-2">
-              <router-link to="/login" class="btn btn-outline-primary btn-sm rounded-pill px-3">Login</router-link>
+            <li class="nav-item">
+              <router-link to="/login" class="nav-link" exact-active-class="active">Login</router-link>
             </li>
-            <li class="nav-item ms-2">
-              <router-link to="/signup" class="btn btn-primary btn-sm rounded-pill px-3 text-white">Sign Up</router-link>
+            <li class="nav-item">
+              <router-link to="/signup" class="nav-link" exact-active-class="active">Sign Up</router-link>
             </li>
           </template>
           <template v-else>
              <li class="nav-item ms-3 dropdown">
               <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="avatar-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                <div class="avatar-circle bg-purple text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
                   {{ currentUser.displayName ? currentUser.displayName[0].toUpperCase() : 'U' }}
                 </div>
               </a>
