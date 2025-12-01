@@ -11,64 +11,11 @@
 .menu-title {
   color: #fff;
   font-size: 2.3rem;
-}
-
-.menu-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-}
-
-.menu-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: black;
-  line-height: 1.3;
-}
-
-.menu-price {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: rgba(104, 50, 146, 1);
-}
-
-.menu-btn {
-  background: hotpink;
-  color: #fff;
-  border-radius: 25px;
-  border: none;
-  font-size: 0.85rem;
-  padding: 0.5rem 1.5rem;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.menu-btn:hover {
-  transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-  .menu-img {
-    height: 120px;
-  }
-
-  .menu-name {
-    font-size: 0.85rem;
-  }
+  font-family: 'Berkshire Swash', cursive;
 }
 
 @media (max-width: 576px) {
   .menu-title {
     font-size: 2rem;
-  }
-
-  .menu-img {
-    height: 100px;
-  }
-
-  .menu-btn {
-    font-size: 0.75rem;
-    padding: 0.4rem 1rem;
   }
 }
