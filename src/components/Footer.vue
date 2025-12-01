@@ -2,7 +2,6 @@
   <footer class="footer text-white py-4">
     <div class="container">
       <div class="row g-4">
-        <!-- Brand Section -->
         <div class="col-lg-3 col-md-6">
           <router-link to="/" class="footer-logo d-block mb-3">Ice Cream Name</router-link>
           <p class="footer-desc">
@@ -10,7 +9,6 @@
           </p>
         </div>
 
-        <!-- Navigation Section -->
         <div class="col-lg-2 col-md-6">
           <h4 class="section-title h6 mb-3">Quick Links</h4>
           <nav class="footer-nav">
@@ -27,7 +25,6 @@
           </nav>
         </div>
 
-        <!-- Contact Section -->
         <div class="col-lg-4 col-md-6">
           <h4 class="section-title h6 mb-3">Get in Touch</h4>
           <div class="contact-info d-flex flex-column gap-2">
@@ -46,7 +43,6 @@
           </div>
         </div>
 
-        <!-- Social Section -->
         <div class="col-lg-3 col-md-6">
           <h4 class="section-title h6 mb-3">Follow Us</h4>
           <p class="social-desc mb-3">Stay connected for sweet updates!</p>
@@ -64,7 +60,6 @@
         </div>
       </div>
 
-      <!-- Footer Bottom -->
       <div class="footer-bottom border-top border-light border-opacity-25 mt-4 pt-3">
         <div class="text-center">
           <p class="mb-0">&copy; 2025 Ice Cream Name. All rights reserved.</p>
