@@ -73,7 +73,13 @@
           rows="4"
         ></textarea>
 
-        <button class="submit-btn btn w-100" @click="submitRating">Submit Now</button>
+        <button 
+          class="submit-btn btn w-100" 
+          @click="submitRating" 
+          :disabled="isSubmitting"
+        >
+          {{ isSubmitting ? "Submitting..." : "Submit Now" }}
+        </button>
       </div>
     </div>
   </div>
@@ -81,7 +87,7 @@
 
 <script setup>
 import "../assets/Rating.css";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { menuItems } from "../data/menuItems.js";
 import { getRating, submitRating as submitRatingService } from "../utils/ratingService.js";
@@ -96,29 +102,46 @@ const item = menuItems.find((i) => i.name === name);
 const image = ref(route.query.image || item?.image);
 const price = route.query.price || item?.price || "—";
 
-const defaultRating = Number(item?.rating || 5);
-const current = getRating(name, defaultRating);
+const defaultRating = Number(item?.rating || 0);
 
-const avgRating = computed(() => current.avg || defaultRating);
+// Reactive state for current rating data
+const current = ref({
+  avg: defaultRating,
+  count: 0,
+  total: 0,
+  reviews: [],
+});
+
+const avgRating = computed(() => current.value.avg || defaultRating);
+
+onMounted(async () => {
+  try {
+    current.value = await getRating(name, defaultRating);
+  } catch (e) {
+    console.error("Failed to load rating", e);
+  }
+});
 
 const firstName = ref("");
 const lastName = ref("");
 const rating = ref(0);
 const review = ref("");
 const hasRated = ref(false);
+const isSubmitting = ref(false);
 
 function setRating(n) {
   rating.value = n;
 }
 
-function submitRating() {
+async function submitRating() {
   if (rating.value === 0) {
     alert("Please select a rating");
     return;
   }
 
+  isSubmitting.value = true;
   try {
-    submitRatingService(
+    await submitRatingService(
       name,
       rating.value,
       firstName.value,
@@ -128,7 +151,10 @@ function submitRating() {
     hasRated.value = true;
     setTimeout(() => router.push("/menu"), 2000);
   } catch (error) {
+    console.error("Submission error:", error);
     alert(error.message || "Failed to submit rating. Please try again.");
+  } finally {
+    isSubmitting.value = false;
   }
 }
 </script>

@@ -129,9 +129,9 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn hero-cta-btn w-100 d-inline-flex align-items-center justify-content-center">
-              Submit Now
-              <font-awesome-icon icon="arrow-right" class="ms-2" />
+            <button type="submit" class="btn hero-cta-btn w-100 d-inline-flex align-items-center justify-content-center" :disabled="isSubmitting">
+              {{ isSubmitting ? "Sending..." : "Submit Now" }}
+              <font-awesome-icon v-if="!isSubmitting" icon="arrow-right" class="ms-2" />
             </button>
           </form>
         </div>
@@ -154,7 +154,10 @@ const form = ref({
   message: ''
 })
 
+const isSubmitting = ref(false)
+
 async function handleSubmit() {
+  isSubmitting.value = true
   try {
     const result = await submitContactForm(form.value)
     alert(result.message)
@@ -167,7 +170,10 @@ async function handleSubmit() {
       message: ''
     }
   } catch (error) {
+    console.error("Contact submission error:", error);
     alert(error.message || 'Failed to submit form. Please try again.')
+  } finally {
+    isSubmitting.value = false
   }
 }
 </script>

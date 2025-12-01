@@ -18,7 +18,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { computed } from "vue";
+import { ref, onMounted } from "vue";
 import { getAverageRating } from "../utils/ratingService.js";
 import "../assets/IceCreamCard.css";
 
@@ -31,8 +31,14 @@ const props = defineProps({
   rating: String,
 });
 
-const computedRating = computed(() => {
-  return getAverageRating(props.name, props.rating);
+const computedRating = ref(props.rating);
+
+onMounted(async () => {
+  try {
+    computedRating.value = await getAverageRating(props.name, props.rating);
+  } catch (e) {
+    console.error("Failed to fetch rating", e);
+  }
 });
 
 const onRate = () => {

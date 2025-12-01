@@ -16,6 +16,7 @@ import {
   faArrowUp,
   faChevronDown,
   faChevronUp,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -37,7 +38,8 @@ library.add(
   faArrowRight,
   faArrowUp,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faTriangleExclamation
 );
 
 const app = createApp(App);

@@ -1,3 +1,6 @@
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+
 /**
  * Validate email format
  * @param {string} email - Email address to validate
@@ -64,14 +67,19 @@ export async function submitContactForm(formData) {
     throw new Error(validation.errors[Object.keys(validation.errors)[0]]);
   }
   
- 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        success: true,
-        message: 'Thank you for your message! We will get back to you soon.'
-      });
-    }, 500);
-  });
+  try {
+    await addDoc(collection(db, "contacts"), {
+      ...formData,
+      createdAt: new Date()
+    });
+
+    return {
+      success: true,
+      message: 'Thank you for your message! We will get back to you soon.'
+    };
+  } catch (error) {
+    console.error("Error adding contact document: ", error);
+    throw new Error("Failed to submit form. Please try again later.");
+  }
 }
 
