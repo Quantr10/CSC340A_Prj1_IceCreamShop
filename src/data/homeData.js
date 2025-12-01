@@ -16,19 +16,19 @@ export const popularTreats = [
     image: heroImages.main,
     name: "Almond Joy Sundae",
     price: "6.49",
-    rating: "4.9",
+    rating: "0",
   },
   {
     image: sorbetImg,
     name: "Berry Sorbet",
     price: "4.89",
-    rating: "4.8",
+    rating: "0",
   },
   {
     image: heroImages.secondary,
     name: "Coconut Milk Chocolate Chip",
     price: "5.99",
-    rating: "4.9",
+    rating: "0",
   },
 ];
 
@@ -37,19 +37,19 @@ export const bestSellers = [
     image: dairyFreeImg,
     name: "Dairy Free Classic",
     price: "6.49",
-    rating: "4.9",
+    rating: "0",
   },
   {
     image: dairyFreeAlmondImg,
     name: "Dairy Free Almond",
     price: "4.89",
-    rating: "4.8",
+    rating: "0",
   },
   {
     image: heroImages.scoops,
     name: "Chocolate Fudge",
     price: "5.99",
-    rating: "5.0",
+    rating: "0",
   },
 ];
 

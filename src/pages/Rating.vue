@@ -127,7 +127,7 @@ function setRating(n) {
   rating.value = n
 }
 
-function submitRating() {
+async function submitRating() {
   if (rating.value === 0) {
     alert("Please select a rating")
     return

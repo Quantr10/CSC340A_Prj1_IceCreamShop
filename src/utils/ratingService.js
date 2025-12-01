@@ -1,29 +1,40 @@
-const STORAGE_KEY = "ratings";
+import { db } from '../firebase';
+import { doc, getDoc, setDoc, increment, arrayUnion } from 'firebase/firestore';
 
 /**
- * Get all ratings from localStorage
- * @returns {Object} All ratings data
- */
-export function getAllRatings() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-  } catch (error) {
-    console.error("Error reading ratings from localStorage:", error);
-    return {};
-  }
-}
-
-/**
- * Get rating data for a specific item
+ * Get rating data for a specific item from Firestore
  * @param {string} itemName - Name of the ice cream item
  * @param {number} defaultRating - Default rating if no rating exists
- * @returns {Object} Rating data for the item
+ * @returns {Promise<Object>} Rating data for the item
  */
-export function getRating(itemName, defaultRating = 5) {
-  const allRatings = getAllRatings();
-  const itemRating = allRatings[itemName];
-  
-  if (!itemRating) {
+export async function getRating(itemName, defaultRating = 0) {
+  try {
+    const docRef = doc(db, "ratings", itemName);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      // Calculate average dynamically since we update total/count atomically
+      const total = data.total || 0;
+      const count = data.count || 0;
+      const avg = count > 0 ? total / count : defaultRating;
+      
+      return {
+        ...data,
+        avg,
+        count,
+        total
+      };
+    } else {
+      return {
+        avg: defaultRating,
+        count: 0,
+        total: 0,
+        reviews: [],
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching rating:", error);
     return {
       avg: defaultRating,
       count: 0,
@@ -31,56 +42,54 @@ export function getRating(itemName, defaultRating = 5) {
       reviews: [],
     };
   }
-  
-  return itemRating;
 }
 
 /**
  * Get the average rating for an item, or return default if not found
  * @param {string} itemName - Name of the ice cream item
  * @param {string|number} defaultRating - Default rating to return if no rating exists
- * @returns {string} Formatted rating (e.g., "4.5")
+ * @returns {Promise<string>} Formatted rating (e.g., "4.5")
  */
-export function getAverageRating(itemName, defaultRating = "5") {
-  const rating = getRating(itemName, Number(defaultRating));
-  return rating.avg ? rating.avg.toFixed(1) : String(defaultRating);
+export async function getAverageRating(itemName, defaultRating = "0") {
+  const rating = await getRating(itemName, Number(defaultRating));
+  return (rating.avg !== undefined && rating.avg !== null) ? rating.avg.toFixed(1) : String(defaultRating);
 }
 
 /**
- * Submit a new rating for an item
+ * Submit a new rating for an item to Firestore
  * @param {string} itemName - Name of the ice cream item
  * @param {number} stars - Rating value (1-5)
  * @param {string} firstName - User's first name
  * @param {string} lastName - User's last name
  * @param {string} reviewText - Review text
  */
-export function submitRating(itemName, stars, firstName = "", lastName = "", reviewText = "") {
+export async function submitRating(itemName, stars, firstName = "", lastName = "", reviewText = "") {
   if (stars === 0) {
     throw new Error("Rating must be greater than 0");
   }
 
-  const allRatings = getAllRatings();
-  const current = allRatings[itemName] || { total: 0, count: 0, reviews: [] };
-
-  current.total += stars;
-  current.count += 1;
-  current.avg = current.total / current.count;
-  
-  if (reviewText || firstName || lastName) {
-    current.reviews.push({
+  try {
+    const docRef = doc(db, "ratings", itemName);
+    
+    const newReview = {
       user: `${firstName || "Anonymous"} ${lastName || ""}`.trim(),
       stars: stars,
-      text: reviewText,
-    });
-  }
+      text: reviewText || "",
+      createdAt: new Date().toISOString()
+    };
 
-  allRatings[itemName] = current;
-  
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(allRatings));
+    // Use atomic updates to increment counters and add review
+    // This works even if the client is offline (writes are queued)
+    // and avoids the need to read the document first (which fails when offline)
+    await setDoc(docRef, {
+      total: increment(stars),
+      count: increment(1),
+      reviews: arrayUnion(newReview),
+      // We don't store 'avg' anymore, it's calculated on read
+    }, { merge: true });
+    
   } catch (error) {
-    console.error("Error saving rating to localStorage:", error);
-    throw new Error("Failed to save rating");
+    console.error("Error saving rating to Firestore:", error);
+    throw error;
   }
 }
-

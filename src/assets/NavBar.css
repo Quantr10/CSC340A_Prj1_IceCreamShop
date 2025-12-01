@@ -34,3 +34,33 @@
   border-bottom: 2px solid hotpink;
 }
 
+/* Custom Purple Buttons for Auth */
+.btn-purple {
+  background-color: #59369C; /* Matches Auth.css purple */
+  color: white;
+  border: 1px solid #59369C;
+  transition: all 0.3s;
+}
+
+.btn-purple:hover {
+  background-color: #4a2c82;
+  border-color: #4a2c82;
+  color: white;
+}
+
+.btn-outline-purple {
+  background-color: transparent;
+  color: #59369C;
+  border: 1px solid #59369C;
+  transition: all 0.3s;
+}
+
+.btn-outline-purple:hover {
+  background-color: #59369C;
+  color: white;
+}
+
+/* Avatar */
+.bg-purple {
+  background-color: #59369C !important;
+}

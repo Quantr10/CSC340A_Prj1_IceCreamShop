@@ -141,7 +141,10 @@ const form = ref({
   message: ''
 })
 
+const isSubmitting = ref(false)
+
 async function handleSubmit() {
+  isSubmitting.value = true
   try {
     const result = await submitContactForm(form.value)
     alert(result.message)
@@ -154,7 +157,10 @@ async function handleSubmit() {
       message: ''
     }
   } catch (error) {
+    console.error("Contact submission error:", error);
     alert(error.message || 'Failed to submit form. Please try again.')
+  } finally {
+    isSubmitting.value = false
   }
 }
 </script>
