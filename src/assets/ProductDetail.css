@@ -1,0 +1,147 @@
+/* General Page Styles */
+.product-detail-page {
+  padding-top: 56px; /* Reduced offset to sit flush if needed, but 56-80px is standard for fixed nav */
+  background-color: #fff;
+}
+
+/* Header Section - Matching Menu Page */
+.product-header {
+  background: linear-gradient(135deg, hotpink, rgba(104, 50, 146, 1));
+  padding: 3rem 0;
+  margin: 0 0 3rem 0; /* Add bottom margin to separate from content */
+}
+
+.product-detail-title {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem; /* Matched to Menu.css */
+  margin-bottom: 1rem;
+  color: #fff; /* White text on gradient */
+}
+
+/* Breadcrumbs on dark background */
+.breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item a:hover {
+  color: #fff;
+}
+
+.breadcrumb-item.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Separator color */
+.breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Images */
+.main-image-wrapper {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.main-img {
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.thumb-img-wrapper {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.thumb-img-wrapper:hover {
+  opacity: 1;
+}
+
+.thumb-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Product Info */
+.product-name {
+  font-weight: 700;
+  color: #333;
+}
+
+.text-purple {
+  color: #59369C !important;
+}
+
+.text-pink {
+  color: #ff6b81 !important;
+}
+
+/* Primary Action Button - Matches Home Hero CTA Gradient */
+.btn-pink {
+  background: linear-gradient(135deg, #ff5fa6, #ff3778); /* Gradient from Home.css */
+  color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 30px; /* Pill shape */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 10px rgba(255, 95, 166, 0.3);
+}
+
+.btn-pink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 95, 166, 0.4);
+  color: white;
+}
+
+/* Size Buttons */
+.size-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border: 1px solid #dee2e6;
+  color: #666;
+}
+
+.size-btn:hover, .size-btn:focus {
+  background-color: #59369C;
+  color: white;
+  border-color: #59369C;
+}
+
+/* Tabs */
+.nav-tabs .nav-link {
+  font-family: 'Poppins', sans-serif;
+  color: #666;
+  cursor: pointer; /* Ensure pointer cursor */
+}
+
+.nav-tabs .nav-link.active {
+  color: #ff6b81 !important; /* Pink active tab */
+  border-bottom: 2px solid #ff6b81 !important;
+}
+
+/* Review List */
+.review-item:last-child {
+  border-bottom: none !important;
+}
+
+.x-small {
+  font-size: 0.75rem;
+}
+
+/* Related Products */
+.related-title {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 2rem;
+}

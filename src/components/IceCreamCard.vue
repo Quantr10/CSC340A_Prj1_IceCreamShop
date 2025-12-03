@@ -7,18 +7,19 @@
 
       <div class="menu-stars d-flex align-items-center justify-content-center mb-2">
         <font-awesome-icon icon="star" class="star-icon" />
-        <span class="rating-number">{{ computedRating }}/5</span>
+        <span class="rating-number">{{ displayRating }}/5</span>
       </div>
 
       <p class="menu-price">${{ price }}</p>
-      <button class="menu-btn mt-auto" @click="onRate">Rate This</button>
+      <!-- Changed to "Add to Cart" which links to ProductDetail -->
+      <button class="menu-btn mt-auto" @click="onAddToCart">Add to Cart</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { getAverageRating } from "../utils/ratingService.js";
 import "../assets/IceCreamCard.css";
 
@@ -31,24 +32,25 @@ const props = defineProps({
   rating: String,
 });
 
-const computedRating = ref(props.rating);
+const displayRating = ref("0.0");
 
+// Fetch rating when component mounts
 onMounted(async () => {
-  try {
-    computedRating.value = await getAverageRating(props.name, props.rating);
-  } catch (e) {
-    console.error("Failed to fetch rating", e);
-  }
+  displayRating.value = await getAverageRating(props.name, 0);
 });
 
-const onRate = () => {
+// Also watch for name changes (if reused)
+watch(() => props.name, async (newName) => {
+  displayRating.value = await getAverageRating(newName, 0);
+});
+
+const onAddToCart = () => {
   router.push({
-    name: "Rating",
+    name: "ProductDetail",
     params: { name: props.name },
     query: {
       image: props.image,
-      price: props.price,
-      rating: props.rating,
+      price: props.price
     },
   });
 };

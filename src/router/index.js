@@ -6,6 +6,7 @@ import Faq from "../pages/Faq.vue";
 import Rating from "../pages/Rating.vue";
 import Login from "../pages/Login.vue";
 import Signup from "../pages/Signup.vue";
+import ProductDetail from "../pages/ProductDetail.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -15,6 +16,7 @@ const routes = [
   { path: "/rating/:name", name: "Rating", component: Rating },
   { path: "/login", name: "Login", component: Login },
   { path: "/signup", name: "Signup", component: Signup },
+  { path: "/product/:name", name: "ProductDetail", component: ProductDetail },
 ];
 
 const router = createRouter({
