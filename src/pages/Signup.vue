@@ -83,6 +83,7 @@ import '../assets/Auth.css';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { registerUser, loginWithGoogle } from '../utils/authService';
+import { toast } from "vue3-toastify";
 
 const router = useRouter();
 const name = ref('');
@@ -97,7 +98,7 @@ async function handleRegister() {
     // Success - redirect to home
     router.push('/');
   } catch (error) {
-    alert(error.message);
+    toast(error.message);
   } finally {
     isLoading.value = false;
   }
@@ -108,7 +109,7 @@ async function handleGoogleLogin() {
     await loginWithGoogle();
     router.push('/');
   } catch (error) {
-    alert(error.message);
+    toast(error.message);
   }
 }
 </script>

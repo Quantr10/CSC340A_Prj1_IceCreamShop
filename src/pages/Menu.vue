@@ -24,7 +24,23 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 import "../assets/Menu.css";
 import IceCreamCard from "../components/IceCreamCard.vue";
-import { menuItems } from "../data/menuItems.js";
+
+import { db } from "@/firebase.js";
+import { collection, getDocs } from "firebase/firestore";
+
+const menuItems = ref([]);
+
+async function fetchMenu() {
+  const querySnapshot = await getDocs(collection(db, "flavors"));
+
+  menuItems.value = querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+}
+
+onMounted(fetchMenu);
 </script>

@@ -132,6 +132,7 @@ import '../assets/Contact.css'
 import { ref } from 'vue'
 import { contactInfo } from '../data/contactData.js'
 import { submitContactForm } from '../utils/contactService.js'
+import { toast } from "vue3-toastify";
 
 const form = ref({
   firstName: '',
@@ -147,7 +148,7 @@ async function handleSubmit() {
   isSubmitting.value = true
   try {
     const result = await submitContactForm(form.value)
-    alert(result.message)
+    toast(result.message)
 
     form.value = {
       firstName: '',
@@ -158,7 +159,7 @@ async function handleSubmit() {
     }
   } catch (error) {
     console.error("Contact submission error:", error);
-    alert(error.message || 'Failed to submit form. Please try again.')
+    toast(error.message || 'Failed to submit form. Please try again.')
   } finally {
     isSubmitting.value = false
   }
