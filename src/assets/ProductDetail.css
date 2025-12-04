@@ -1,45 +1,26 @@
-/* General Page Styles */
+/* ============================= */
+/* GENERAL PAGE STYLE */
+/* ============================= */
 .product-detail-page {
-  padding-top: 56px; /* Reduced offset to sit flush if needed, but 56-80px is standard for fixed nav */
   background-color: #fff;
 }
 
-/* Header Section - Matching Menu Page */
+/* HEADER */
 .product-header {
   background: linear-gradient(135deg, hotpink, rgba(104, 50, 146, 1));
   padding: 3rem 0;
-  margin: 0 0 3rem 0; /* Add bottom margin to separate from content */
+  margin-bottom: 3rem;
 }
 
 .product-detail-title {
   font-family: 'Berkshire Swash', cursive;
-  font-size: 2.3rem; /* Matched to Menu.css */
-  margin-bottom: 1rem;
-  color: #fff; /* White text on gradient */
-}
-
-/* Breadcrumbs on dark background */
-.breadcrumb-item a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.breadcrumb-item a:hover {
+  font-size: 2.3rem;
   color: #fff;
 }
 
-.breadcrumb-item.active {
-  color: #fff;
-  font-weight: 600;
-}
-
-/* Separator color */
-.breadcrumb-item + .breadcrumb-item::before {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* Images */
+/* ============================= */
+/* IMAGE STYLING */
+/* ============================= */
 .main-image-wrapper {
   background-color: #f8f9fa;
   padding: 1rem;
@@ -52,25 +33,9 @@
   width: 100%;
 }
 
-.thumb-img-wrapper {
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.thumb-img-wrapper:hover {
-  opacity: 1;
-}
-
-.thumb-img-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Product Info */
+/* ============================= */
+/* PRODUCT INFO */
+/* ============================= */
 .product-name {
   font-weight: 700;
   color: #333;
@@ -80,68 +45,167 @@
   color: #59369C !important;
 }
 
-.text-pink {
-  color: #ff6b81 !important;
-}
-
-/* Primary Action Button - Matches Home Hero CTA Gradient */
 .btn-pink {
-  background: linear-gradient(135deg, #ff5fa6, #ff3778); /* Gradient from Home.css */
-  color: white;
-  border: none;
+  background: linear-gradient(135deg, #ff5fa6, #ff3778);
+  color: white !important;
+  border-radius: 30px;
+  padding: 0.7rem 2rem;
   font-weight: 600;
-  border-radius: 30px; /* Pill shape */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 10px rgba(255, 95, 166, 0.3);
+  transition: 0.25s ease;
 }
-
 .btn-pink:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 95, 166, 0.4);
-  color: white;
 }
 
-/* Size Buttons */
-.size-btn {
+/* ============================= */
+/* OPTION LABEL */
+/* ============================= */
+/* ROW: label + options aligned perfectly */
+.option-row {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* LEFT COLUMN (label) — fixed width */
+.option-label {
+  font-weight: 700;
+  width: 100px;           /* cố định để các hàng thẳng */
+  flex-shrink: 0;         /* không bị co */
+  margin-top: 6px;        /* đẹp hơn so với nút */
+  color: #333;
+}
+
+/* RIGHT COLUMN (options) — flex 100% and wrap */
+.options-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1;                /* chiếm full width */
+}
+
+/* Buttons */
+.select-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #555;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Hover */
+.select-btn:hover {
+  border-color: #59369c;
+  color: #59369c;
+}
+
+/* Active state */
+.select-btn.active {
+  background-color: #59369c;
+  color: white !important;
+  border-color: #59369c;
+}
+
+/* Circle buttons for size */
+.select-btn.circle {
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  border: 1px solid #dee2e6;
-  color: #666;
+  padding: 0;
+  border-radius: 50%;
+  min-width: 40px;
 }
 
-.size-btn:hover, .size-btn:focus {
-  background-color: #59369C;
-  color: white;
-  border-color: #59369C;
+
+/* ============================= */
+/* REVIEW SECTION */
+/* ============================= */
+.inline-rating-section {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
-/* Tabs */
+.review-title {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 2rem;
+}
+
+.review-form {
+  max-width: 700px;
+  margin: 2rem auto 0;
+}
+
+.review-star {
+  color: #ccc;
+  margin-right: 2px;
+  font-size: 1rem !important;
+}
+
+.review-star.active {
+  color: gold;
+}
+
+/* ============================= */
+/* TABS */
+/* ============================= */
 .nav-tabs .nav-link {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Berkshire Swash', cursive !important;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
   color: #666;
-  cursor: pointer; /* Ensure pointer cursor */
 }
 
 .nav-tabs .nav-link.active {
-  color: #ff6b81 !important; /* Pink active tab */
+  color: #ff6b81 !important;
   border-bottom: 2px solid #ff6b81 !important;
 }
 
-/* Review List */
-.review-item:last-child {
-  border-bottom: none !important;
-}
-
-.x-small {
-  font-size: 0.75rem;
-}
-
-/* Related Products */
+/* ============================= */
+/* RELATED PRODUCTS */
+/* ============================= */
 .related-title {
   font-family: 'Berkshire Swash', cursive;
   font-size: 2rem;
+}
+
+.stars .star {
+  color: #ccc;
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars .star.active {
+  color: gold;
+}
+
+
+/* EXTRA INFO UNDER ADD TO CART */
+.extra-info {
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.info-icon {
+  font-size: 1.1rem;
+  color: #59369c; /* tím nhẹ giống theme */
+}
+
+.info-link {
+  color: #59369c;
+  margin-left: 4px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.info-link:hover {
+  color: #ff5fa6; /* hồng gradient tone website của bạn */
 }

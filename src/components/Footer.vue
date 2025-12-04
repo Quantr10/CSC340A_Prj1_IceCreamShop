@@ -9,15 +9,15 @@
           </p>
         </div>
 
-        <div class="col-lg-2 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <h4 class="section-title h6 mb-3">Quick Links</h4>
           <nav class="footer-nav">
             <div class="row g-2">
-              <div class="col-6">
+              <div class="col-5">
                 <router-link to="/" class="nav-link d-block">Home</router-link>
                 <router-link to="/menu" class="nav-link d-block">Menu</router-link>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 <router-link to="/faq" class="nav-link d-block">FAQ</router-link>
                 <router-link to="/contact" class="nav-link d-block">Contact</router-link>
               </div>
@@ -25,12 +25,12 @@
           </nav>
         </div>
 
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <h4 class="section-title h6 mb-3">Get in Touch</h4>
           <div class="contact-info d-flex flex-column gap-2">
             <div class="contact-item d-flex align-items-center">
               <font-awesome-icon icon="location-dot" class="contact-icon me-2" />
-              <span>121 King Street, Melbourne, Australia</span>
+              <span>123 Locust St, Greencastle, IN 46135</span>
             </div>
             <div class="contact-item d-flex align-items-center">
               <font-awesome-icon icon="phone" class="contact-icon me-2" />

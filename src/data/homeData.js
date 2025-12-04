@@ -11,48 +11,6 @@ export const heroImages = {
   scoops: chocoFudgeImg,
 };
 
-export const popularTreats = [
-  {
-    image: heroImages.main,
-    name: "Almond Joy Sundae",
-    price: "6.49",
-    rating: "0",
-  },
-  {
-    image: sorbetImg,
-    name: "Berry Sorbet",
-    price: "4.89",
-    rating: "0",
-  },
-  {
-    image: heroImages.secondary,
-    name: "Coconut Milk Chocolate Chip",
-    price: "5.99",
-    rating: "0",
-  },
-];
-
-export const bestSellers = [
-  {
-    image: dairyFreeImg,
-    name: "Dairy Free Classic",
-    price: "6.49",
-    rating: "0",
-  },
-  {
-    image: dairyFreeAlmondImg,
-    name: "Dairy Free Almond",
-    price: "4.89",
-    rating: "0",
-  },
-  {
-    image: heroImages.scoops,
-    name: "Chocolate Fudge",
-    price: "5.99",
-    rating: "0",
-  },
-];
-
 export const avatars = [
   "https://randomuser.me/api/portraits/women/68.jpg",
   "https://randomuser.me/api/portraits/men/45.jpg",

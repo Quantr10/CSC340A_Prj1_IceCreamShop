@@ -133,15 +133,38 @@
 </template>
 
 <script setup>
-import IceCreamCard from "../components/IceCreamCard.vue";
 import iceCreamBowlImg from "@/images/icecream-bowl.png";
-import { heroImages, popularTreats, bestSellers, avatars } from "../data/homeData.js";
+import { heroImages, avatars } from "../data/homeData.js";
 import "../assets/Home.css";
 
 const heroMain = heroImages.main;
 const heroSecondary = heroImages.secondary;
 const heroScoops = heroImages.scoops;
+import { ref, onMounted } from "vue";
+import IceCreamCard from "../components/IceCreamCard.vue";
+import { db } from "@/firebase.js";
+import { collection, getDocs } from "firebase/firestore";
+import "../assets/Home.css";
+
+const popularTreats = ref([]);
+const bestSellers = ref([]);
+
+async function loadFlavors() {
+  const snapshot = await getDocs(collection(db, "flavors"));
+  const all = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  popularTreats.value = all
+    .filter(item => item.order >= 1 && item.order <= 3)
+    .sort((a, b) => a.order - b.order);
+
+  bestSellers.value = all
+    .filter(item => item.order >= 4 && item.order <= 6)
+    .sort((a, b) => a.order - b.order);
+}
+
+onMounted(loadFlavors);
 </script>
+
 
 <style scoped>
 </style>
