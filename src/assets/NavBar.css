@@ -36,7 +36,7 @@
 
 /* Custom Purple Buttons for Auth */
 .btn-purple {
-  background-color: #59369C; /* Matches Auth.css purple */
+  background-color: #59369C;
   color: white;
   border: 1px solid #59369C;
   transition: all 0.3s;

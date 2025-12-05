@@ -1,3 +1,6 @@
+/* ============================================
+   PAGE
+============================================ */
 .cart-page {
   background-color: #fff;
 }
@@ -13,19 +16,24 @@
   font-size: 2.3rem;
 }
 
-/* ===== CART GRID LAYOUT ===== */
+/* ============================================
+   MAIN CART LAYOUT
+============================================ */
 .cart-wrapper {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; /* 2:1 ratio */
   gap: 25px;
 }
 
-/* ===== CART ITEM CARD ===== */
+/* ============================================
+   CART ITEM CARD STYLE
+============================================ */
 .cart-item {
   background: white;
   border-radius: 12px;
 }
 
+/* Product image inside cart */
 .cart-img {
   width: 95px;
   height: 95px;
@@ -33,17 +41,23 @@
   object-fit: cover;
 }
 
-/* ===== ITEM PRICE (UNIT PRICE) ===== */
+/* ============================================
+   PRICE (UNIT PRICE STYLE)
+============================================ */
 .item-price {
   color: hotpink;
 }
 
-/* ===== QUANTITY CONTROL ===== */
+/* ============================================
+   QUANTITY SELECTOR AREA
+============================================ */
 .quantity-control {
   background: white;
 }
 
-/* ===== TRASH ICON BUTTON ===== */
+/* ============================================
+   TRASH (DELETE ITEM) BUTTON
+============================================ */
 .trash-btn {
   background: none;
   border: none;
@@ -58,7 +72,9 @@
   transform: scale(1.1);
 }
 
-/* ===== ORDER SUMMARY ===== */
+/* ============================================
+   ORDER SUMMARY (RIGHT SIDE BOX)
+============================================ */
 .cart-summary {
   background: white;
   border-radius: 12px;
@@ -82,7 +98,9 @@
   transform: translateY(-2px);
 }
 
-/* ===== EMPTY CART ===== */
+/* ============================================
+   EMPTY CART MESSAGE
+============================================ */
 .empty-cart h3 {
   font-size: 1.4rem;
 }
