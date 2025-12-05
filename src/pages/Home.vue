@@ -136,30 +136,22 @@
 import iceCreamBowlImg from "@/images/icecream-bowl.png";
 import { heroImages, avatars } from "../data/homeData.js";
 import "../assets/Home.css";
+import { ref, onMounted } from "vue";
+import IceCreamCard from "../components/IceCreamCard.vue";
+import { sampleFlavors } from "../utils/seed.js";
 
 const heroMain = heroImages.main;
 const heroSecondary = heroImages.secondary;
 const heroScoops = heroImages.scoops;
-import { ref, onMounted } from "vue";
-import IceCreamCard from "../components/IceCreamCard.vue";
-import { db } from "@/firebase.js";
-import { collection, getDocs } from "firebase/firestore";
-import "../assets/Home.css";
 
 const popularTreats = ref([]);
 const bestSellers = ref([]);
 
-async function loadFlavors() {
-  const snapshot = await getDocs(collection(db, "flavors"));
-  const all = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-  popularTreats.value = all
-    .filter(item => item.order >= 1 && item.order <= 3)
-    .sort((a, b) => a.order - b.order);
-
-  bestSellers.value = all
-    .filter(item => item.order >= 4 && item.order <= 6)
-    .sort((a, b) => a.order - b.order);
+function loadFlavors() {
+  // Use local seed data
+  // Split the available flavors between the two sections
+  popularTreats.value = sampleFlavors.slice(0, 3);
+  bestSellers.value = sampleFlavors.slice(3, 6);
 }
 
 onMounted(loadFlavors);

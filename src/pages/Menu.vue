@@ -27,18 +27,15 @@
 import { ref, onMounted } from "vue";
 import "../assets/Menu.css";
 import IceCreamCard from "../components/IceCreamCard.vue";
-
-import { db } from "@/firebase.js";
-import { collection, getDocs } from "firebase/firestore";
+import { sampleFlavors } from "../utils/seed.js";
 
 const menuItems = ref([]);
 
-async function fetchMenu() {
-  const querySnapshot = await getDocs(collection(db, "flavors"));
-
-  menuItems.value = querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
+function fetchMenu() {
+  // Use local seed data directly
+  menuItems.value = sampleFlavors.map(item => ({
+    id: item.name, // Use name as ID since we don't have Firestore IDs
+    ...item
   }));
 }
 
