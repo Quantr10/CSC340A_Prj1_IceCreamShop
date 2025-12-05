@@ -28,15 +28,48 @@ import { ref, onMounted } from "vue";
 import "../assets/Menu.css";
 import IceCreamCard from "../components/IceCreamCard.vue";
 import { sampleFlavors } from "../utils/seed.js";
+import { db } from "@/firebase.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const menuItems = ref([]);
 
-function fetchMenu() {
-  // Use local seed data directly
-  menuItems.value = sampleFlavors.map(item => ({
-    id: item.name, // Use name as ID since we don't have Firestore IDs
+function slugify(text) {
+  return text.toString().toLowerCase().replace(/\s+/g, "-");
+}
+
+async function fetchMenu() {
+  // Start with static seed data
+  const baseItems = sampleFlavors.map(item => ({
+    id: slugify(item.name),
     ...item
   }));
+
+  // Fetch real ratings from Firestore for each product
+  for (let item of baseItems) {
+    const slug = slugify(item.name);
+    
+    try {
+      // Query all reviews for this product
+      const q = query(
+        collection(db, "reviews"), 
+        where("productId", "==", slug)
+      );
+      const snapshot = await getDocs(q);
+      
+      if (!snapshot.empty) {
+        // Calculate average from reviews
+        const reviews = snapshot.docs.map(d => d.data());
+        const totalStars = reviews.reduce((sum, r) => sum + Number(r.stars), 0);
+        item.rating = Number((totalStars / reviews.length).toFixed(1));
+      }
+      // else keep the static rating from seed.js
+    } catch (error) {
+      console.error(`Error fetching rating for ${item.name}:`, error);
+      // Keep static rating on error
+    }
+  }
+
+  menuItems.value = baseItems;
 }
 
 onMounted(fetchMenu);

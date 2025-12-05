@@ -139,6 +139,8 @@ import "../assets/Home.css";
 import { ref, onMounted } from "vue";
 import IceCreamCard from "../components/IceCreamCard.vue";
 import { sampleFlavors } from "../utils/seed.js";
+import { db } from "@/firebase.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const heroMain = heroImages.main;
 const heroSecondary = heroImages.secondary;
@@ -147,11 +149,38 @@ const heroScoops = heroImages.scoops;
 const popularTreats = ref([]);
 const bestSellers = ref([]);
 
-function loadFlavors() {
-  // Use local seed data
-  // Split the available flavors between the two sections
-  popularTreats.value = sampleFlavors.slice(0, 3);
-  bestSellers.value = sampleFlavors.slice(3, 6);
+function slugify(text) {
+  return text.toString().toLowerCase().replace(/\s+/g, "-");
+}
+
+async function loadFlavors() {
+  // Start with static seed data
+  const allFlavors = sampleFlavors.map(item => ({ ...item }));
+
+  // Fetch real ratings from Firestore for each product
+  for (let item of allFlavors) {
+    const slug = slugify(item.name);
+    
+    try {
+      const q = query(
+        collection(db, "reviews"), 
+        where("productId", "==", slug)
+      );
+      const snapshot = await getDocs(q);
+      
+      if (!snapshot.empty) {
+        const reviews = snapshot.docs.map(d => d.data());
+        const totalStars = reviews.reduce((sum, r) => sum + Number(r.stars), 0);
+        item.rating = Number((totalStars / reviews.length).toFixed(1));
+      }
+    } catch (error) {
+      console.error(`Error fetching rating for ${item.name}:`, error);
+    }
+  }
+
+  // Split into sections
+  popularTreats.value = allFlavors.slice(0, 3);
+  bestSellers.value = allFlavors.slice(3, 6);
 }
 
 onMounted(loadFlavors);
