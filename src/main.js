@@ -25,6 +25,11 @@ import {
   faFacebookF,
   faInstagram,
   faTwitter,
+  faCcVisa,
+  faCcMastercard,
+  faCcAmex,
+  faCcDiscover
+
 } from "@fortawesome/free-brands-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -42,7 +47,8 @@ library.add(
   faArrowUp,
   faChevronDown,
   faChevronUp,
-  faTriangleExclamation
+  faTriangleExclamation,
+  faCcVisa, faCcMastercard, faCcAmex, faCcDiscover
 );
 
 const app = createApp(App);
