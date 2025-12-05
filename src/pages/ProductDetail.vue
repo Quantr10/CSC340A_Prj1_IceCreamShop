@@ -243,6 +243,7 @@ import {
 import IceCreamCard from "../components/IceCreamCard.vue";
 import "../assets/ProductDetail.css";
 import { toast } from "vue3-toastify";
+import { addToCartService } from "../utils/cartService";
 
 
 const route = useRoute();
@@ -340,9 +341,54 @@ function formatDate(dateIso) {
   return new Date(dateIso).toLocaleDateString();
 }
 
-function addToCart() {
-  toast(`Added ${qty.value} item(s) to cart!`);
+function resetSelections() {
+  selectedSize.value = null;
+  selectedServing.value = null;
+  selectedTopping.value = null;
+  qty.value = 1;
+
+  // reset rating form nếu muốn
+  userRating.value = 0;
+  firstName.value = "";
+  lastName.value = "";
+  userReview.value = "";
 }
+
+async function addToCart() {
+  if (!selectedSize.value || !selectedServing.value || !selectedTopping.value) {
+    toast("Please choose size, style, and topping");
+    return;
+  }
+
+  const cartItem = {
+    flavorId: item.value.id,
+    name: item.value.name,
+    image: item.value.image,
+    price: price.value,
+    quantity: qty.value,
+
+    size: selectedSize.value,
+    style: selectedServing.value,
+    topping: selectedTopping.value,
+  };
+
+  try {
+    const result = await addToCartService(cartItem);
+
+    if (result.updated) {
+      toast("Updated quantity in cart!");
+    } else {
+      toast("Added new item to cart!");
+    }
+
+    resetSelections();
+
+  } catch (error) {
+    console.error(error);
+    toast("Failed to add to cart.");
+  }
+}
+
 
 onMounted(async () => {
   await fetchFlavor();

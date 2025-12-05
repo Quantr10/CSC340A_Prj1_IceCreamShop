@@ -74,6 +74,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { loginUser, loginWithGoogle } from '../utils/authService';
 import { toast } from "vue3-toastify";
+import { mergeLocalCartToFirebase } from "@/utils/cartService";
 
 const router = useRouter();
 const email = ref('');
@@ -84,7 +85,18 @@ async function handleLogin() {
   isLoading.value = true;
   try {
     await loginUser(email.value, password.value);
-    router.push('/');
+
+    await mergeLocalCartToFirebase();
+
+    const redirect = localStorage.getItem("redirectAfterLogin");
+
+    if (redirect === "cart") {
+      localStorage.removeItem("redirectAfterLogin");
+      router.push("/cart");
+    } else {
+      router.push("/");
+    }
+
   } catch (error) {
     toast(error.message);
   } finally {
@@ -92,13 +104,27 @@ async function handleLogin() {
   }
 }
 
+
 async function handleGoogleLogin() {
   try {
     await loginWithGoogle();
-    router.push('/');
+
+    // Merge local cart
+    await mergeLocalCartToFirebase();
+
+    const redirect = localStorage.getItem("redirectAfterLogin");
+
+    if (redirect === "cart") {
+      localStorage.removeItem("redirectAfterLogin");
+      router.push("/cart");
+    } else {
+      router.push("/");
+    }
+
   } catch (error) {
     toast(error.message);
   }
 }
+
 </script>
 

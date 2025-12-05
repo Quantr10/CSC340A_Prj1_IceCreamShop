@@ -13,7 +13,6 @@
 }
 
 .product-detail-title {
-  font-family: 'Berkshire Swash', cursive;
   font-size: 2.3rem;
   color: #fff;
 }
@@ -130,7 +129,6 @@
 }
 
 .review-title {
-  font-family: 'Berkshire Swash', cursive;
   font-size: 2rem;
 }
 
@@ -168,7 +166,6 @@
 /* RELATED PRODUCTS */
 /* ============================= */
 .related-title {
-  font-family: 'Berkshire Swash', cursive;
   font-size: 2rem;
 }
 

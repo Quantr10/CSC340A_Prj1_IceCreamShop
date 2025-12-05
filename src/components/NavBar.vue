@@ -19,6 +19,10 @@
           <li class="nav-item">
             <router-link to="/contact" class="nav-link" exact-active-class="active">Contact</router-link>
           </li>
+
+          <li class="nav-item">
+            <router-link to="/cart" class="nav-link" exact-active-class="active">Cart</router-link>
+          </li>
           
           <!-- Auth Links -->
           <template v-if="!currentUser">

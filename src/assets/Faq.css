@@ -11,7 +11,6 @@
 .faq-title {
   color: #fff;
   font-size: 2.3rem;
-  font-family: 'Berkshire Swash', cursive;
 }
 
 .faq-question {
@@ -49,11 +48,6 @@
 .contact-box {
   background: #ffe6f0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-}
-
-.contact-title {
-  font-family: 'Berkshire Swash', cursive;
-  color: rgba(104, 50, 146, 1);
 }
 
 .contact-text {

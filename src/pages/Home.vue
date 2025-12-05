@@ -164,7 +164,3 @@ async function loadFlavors() {
 
 onMounted(loadFlavors);
 </script>
-
-
-<style scoped>
-</style>
