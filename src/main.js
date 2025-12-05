@@ -18,6 +18,7 @@ import {
   faChevronDown,
   faChevronUp,faBoxOpen, faClock,
   faTriangleExclamation,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -31,6 +32,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
   faLocationDot,faBoxOpen, faClock,
   faPhone,
+  faTrash,
   faEnvelope,
   faFacebookF,
   faInstagram,
