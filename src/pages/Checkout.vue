@@ -54,6 +54,9 @@
           <!-- PAYMENT SECTION -->
           <div class="mt-5">
             <h4 class="fw-bold mb-3">Payment Method:</h4>
+            <div class="alert alert-warning" role="alert">
+              We do not accept card payments right now, only cash. Please connect with cashier for more details.
+            </div>
 
             <!-- CREDIT CARD -->
             <div class="payment-option p-3 border rounded mb-3"
@@ -163,7 +166,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { deleteDoc, collection, getDocs, doc } from "firebase/firestore";
+import { deleteDoc, collection, getDocs, doc, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
 import "@/assets/Checkout.css";
 import { toast } from "vue3-toastify";
@@ -221,19 +224,54 @@ async function placeOrder(event) {
     return;
   }
 
-  toast("Order placed successfully!", { autoClose: 3000 });
+  try {
+    const uid = auth.currentUser.uid;
+    
+    // 1. Create Order in 'orders' collection
+    const orderData = {
+      userId: uid,
+      userInfo: {
+        firstName: form.value.first,
+        lastName: form.value.last,
+        email: form.value.email,
+        address: {
+          city: form.value.city,
+          state: form.value.state,
+          zip: form.value.zip
+        }
+      },
+      items: cartItems.value.map(item => ({
+        flavorId: item.flavorId || null,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        size: item.size,
+        style: item.style,
+        topping: item.topping
+      })),
+      total: subtotal.value,
+      paymentMethod: form.value.payment,
+      createdAt: serverTimestamp(),
+      status: "Pending"
+    };
 
-  // Delete Firebase cart
-  const uid = auth.currentUser.uid;
-  const snap = await getDocs(collection(db, "users", uid, "cart"));
+    await addDoc(collection(db, "orders"), orderData);
 
-  await Promise.all(
-    snap.docs.map((d) => deleteDoc(doc(db, "users", uid, "cart", d.id)))
-  );
+    toast("Order placed successfully!", { autoClose: 3000 });
 
-  cartItems.value = [];
+    // 2. Delete Firebase cart
+    const snap = await getDocs(collection(db, "users", uid, "cart"));
 
-  setTimeout(() => router.push("/"), 3000);
+    await Promise.all(
+      snap.docs.map((d) => deleteDoc(doc(db, "users", uid, "cart", d.id)))
+    );
+
+    cartItems.value = [];
+
+    setTimeout(() => router.push("/"), 3000);
+  } catch (error) {
+    console.error("Order error:", error);
+    toast("Failed to place order. Please try again.");
+  }
 }
 </script>
-

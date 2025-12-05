@@ -8,15 +8,14 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-
-const auth = getAuth();
+import { getCurrentUser } from "./authService";
 
 // ===============================
 //  ADD TO CART (AUTO: FIREBASE OR LOCAL)
 // ===============================
 export async function addToCartService(cartItem) {
-  const user = auth.currentUser;
+  // Wait for auth state to resolve
+  const user = await getCurrentUser();
 
   if (user) {
     // ===============================
@@ -75,8 +74,7 @@ export async function addToCartService(cartItem) {
 }
 
 export async function mergeLocalCartToFirebase() {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const user = await getCurrentUser();
 
   if (!user) return;
 
