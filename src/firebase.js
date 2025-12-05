@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDrWC4Pvb5qM8oD7hezSXYbEwdXsCaz2nY",
-  authDomain: "icecreamshop-a3a3a.firebaseapp.com",
-  projectId: "icecreamshop-a3a3a",
-  storageBucket: "icecreamshop-a3a3a.firebasestorage.app",
-  messagingSenderId: "367232571020",
-  appId: "1:367232571020:web:babd0ab1293ce4e99dcda9",
-  measurementId: "G-3Y0QH3WGZK"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
