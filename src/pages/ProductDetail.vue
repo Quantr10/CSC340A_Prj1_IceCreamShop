@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <h2 class="product-name mb-2">{{ item?.name || flavorName }}</h2>
+          <h2 class="product-name mb-2">{{ item?.name || displayFlavorName }}</h2>
           <h3 class="product-price text-purple fw-bold mb-3">${{ price }}</h3>
 
           <p class="text-muted mb-4">
@@ -228,7 +228,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { nextTick } from "vue";
 
 import { useRoute } from "vue-router";
@@ -248,6 +248,23 @@ import { addToCartService } from "../utils/cartService";
 
 const route = useRoute();
 const flavorName = route.params.name;
+
+// Helper to match slug from URL with database names
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
+
+// Helper to display pretty name from slug while loading
+const displayFlavorName = computed(() => {
+  if (!flavorName) return "";
+  return flavorName
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+});
 
 const item = ref(null);
 const image = ref("");
@@ -270,7 +287,7 @@ async function fetchFlavor() {
   const snapshot = await getDocs(collection(db, "flavors"));
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
-    if (data.name === flavorName) {
+    if (slugify(data.name) === flavorName) {
       item.value = { id: docSnap.id, ...data };
       image.value = getImageUrl(data.image);
       price.value = data.price;
@@ -333,7 +350,7 @@ async function fetchRelated() {
   const snapshot = await getDocs(collection(db, "flavors"));
   relatedItems.value = snapshot.docs
     .map((doc) => ({ id: doc.id, ...doc.data() }))
-    .filter((i) => i.name !== flavorName)
+    .filter((i) => slugify(i.name) !== flavorName)
     .slice(0, 3);
 }
 

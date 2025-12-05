@@ -43,6 +43,13 @@ function getImageUrl(filename) {
   return new URL(`../images/${filename}`, import.meta.url).href;
 }
 
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
+
 const displayRating = computed(() => {
   return props.rating ? props.rating.toFixed(1) : "0.0";
 });
@@ -50,11 +57,7 @@ const displayRating = computed(() => {
 const onAddToCart = () => {
   router.push({
     name: "ProductDetail",
-    params: { name: props.name },
-    query: {
-      image: props.image,
-      price: props.price,
-    },
+    params: { name: slugify(props.name) },
   });
 };
 </script>
