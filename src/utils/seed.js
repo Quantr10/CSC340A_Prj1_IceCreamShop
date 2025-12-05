@@ -8,7 +8,6 @@ export const sampleFlavors = [
     rating: 4.5,
     image: "almondSundae.png",
     description: "Rich almond flavor with a crunchy topping.",
-    reviews: []
   },
   {
     name: "Chocolate Fudge",
@@ -16,7 +15,6 @@ export const sampleFlavors = [
     rating: 4.8,
     image: "chocoFudge.png",
     description: "Decadent chocolate fudge for the ultimate chocolate lover.",
-    reviews: []
   },
   {
     name: "Coconut Milk",
@@ -24,7 +22,6 @@ export const sampleFlavors = [
     rating: 4.2,
     image: "coconutMilk.png",
     description: "Refreshing coconut milk ice cream, perfect for a hot day.",
-    reviews: []
   },
   {
     name: "Sorbet Delight",
@@ -32,7 +29,6 @@ export const sampleFlavors = [
     rating: 4.0,
     image: "sorbet.png",
     description: "Fruity and icy sorbet to cleanse your palate.",
-    reviews: []
   },
   {
     name: "Dairy Free Classic",
@@ -40,7 +36,6 @@ export const sampleFlavors = [
     rating: 4.3,
     image: "dairyFree.png",
     description: "Classic taste without the dairy. Smooth and creamy.",
-    reviews: []
   },
   {
     name: "Dairy Free Almond",
@@ -48,7 +43,6 @@ export const sampleFlavors = [
     rating: 4.6,
     image: "dairyFreeAlmond.png",
     description: "Nutty almond goodness in a dairy-free base.",
-    reviews: []
   }
 ];
 
