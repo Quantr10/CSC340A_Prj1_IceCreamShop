@@ -97,10 +97,9 @@ async function handleRegister() {
   try {
     await registerUser(email.value, password.value, name.value);
 
-    // 👉 Merge local cart vào Firebase
+    // Merge local cart vào Firebase
     await mergeLocalCartToFirebase();
 
-    // 👉 Kiểm tra redirect
     const redirect = localStorage.getItem("redirectAfterLogin");
 
     if (redirect === "cart") {

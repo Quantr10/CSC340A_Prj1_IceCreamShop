@@ -1,11 +1,9 @@
-/* ============================= */
-/* GENERAL PAGE STYLE */
-/* ============================= */
+/* GENERAL PAGE SETUP */
 .product-detail-page {
   background-color: #fff;
 }
 
-/* HEADER */
+/* HEADER BAR */
 .product-header {
   background: linear-gradient(135deg, hotpink, rgba(104, 50, 146, 1));
   padding: 3rem 0;
@@ -17,9 +15,7 @@
   color: #fff;
 }
 
-/* ============================= */
-/* IMAGE STYLING */
-/* ============================= */
+/* MAIN IMAGE DISPLAY */
 .main-image-wrapper {
   background-color: #f8f9fa;
   padding: 1rem;
@@ -32,9 +28,7 @@
   width: 100%;
 }
 
-/* ============================= */
-/* PRODUCT INFO */
-/* ============================= */
+/* PRODUCT TEXT + PRICE */
 .product-name {
   font-weight: 700;
   color: #333;
@@ -44,6 +38,7 @@
   color: #59369C !important;
 }
 
+/* ADD TO CART BUTTON */
 .btn-pink {
   background: linear-gradient(135deg, #ff5fa6, #ff3778);
   color: white !important;
@@ -52,39 +47,35 @@
   font-weight: 600;
   transition: 0.25s ease;
 }
+
 .btn-pink:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 95, 166, 0.4);
 }
 
-/* ============================= */
-/* OPTION LABEL */
-/* ============================= */
-/* ROW: label + options aligned perfectly */
+/* OPTION SELECTION SECTION */
 .option-row {
   display: flex;
   align-items: flex-start;
   width: 100%;
 }
 
-/* LEFT COLUMN (label) — fixed width */
 .option-label {
   font-weight: 700;
-  width: 100px;           /* cố định để các hàng thẳng */
-  flex-shrink: 0;         /* không bị co */
-  margin-top: 6px;        /* đẹp hơn so với nút */
+  width: 100px;
+  flex-shrink: 0;
+  margin-top: 6px;
   color: #333;
 }
 
-/* RIGHT COLUMN (options) — flex 100% and wrap */
 .options-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  flex: 1;                /* chiếm full width */
+  flex: 1;
 }
 
-/* Buttons */
+/* OPTION BUTTONS */
 .select-btn {
   padding: 0.5rem 1rem;
   border-radius: 25px;
@@ -94,23 +85,20 @@
   cursor: pointer;
   transition: 0.2s ease;
   font-size: 0.9rem;
-  text-align: center;
 }
 
-/* Hover */
 .select-btn:hover {
   border-color: #59369c;
   color: #59369c;
 }
 
-/* Active state */
 .select-btn.active {
   background-color: #59369c;
   color: white !important;
   border-color: #59369c;
 }
 
-/* Circle buttons for size */
+/* Round size option buttons */
 .select-btn.circle {
   width: 40px;
   height: 40px;
@@ -119,10 +107,7 @@
   min-width: 40px;
 }
 
-
-/* ============================= */
-/* REVIEW SECTION */
-/* ============================= */
+/* INLINE REVIEW SECTION */
 .inline-rating-section {
   margin-top: 4rem;
   margin-bottom: 4rem;
@@ -137,6 +122,7 @@
   margin: 2rem auto 0;
 }
 
+/* Stars for existing reviews */
 .review-star {
   color: #ccc;
   margin-right: 2px;
@@ -147,9 +133,7 @@
   color: gold;
 }
 
-/* ============================= */
 /* TABS */
-/* ============================= */
 .nav-tabs .nav-link {
   font-family: 'Berkshire Swash', cursive !important;
   font-size: 1.2rem;
@@ -162,13 +146,12 @@
   border-bottom: 2px solid #ff6b81 !important;
 }
 
-/* ============================= */
 /* RELATED PRODUCTS */
-/* ============================= */
 .related-title {
   font-size: 2rem;
 }
 
+/* Interactive star ratings for inline review */
 .stars .star {
   color: #ccc;
   font-size: 2.2rem;
@@ -180,8 +163,7 @@
   color: gold;
 }
 
-
-/* EXTRA INFO UNDER ADD TO CART */
+/* EXTRA INFO BOXES */
 .extra-info {
   margin-bottom: 1.5rem;
 }
@@ -193,16 +175,15 @@
 
 .info-icon {
   font-size: 1.1rem;
-  color: #59369c; /* tím nhẹ giống theme */
+  color: #59369c;
 }
 
 .info-link {
   color: #59369c;
   margin-left: 4px;
   text-decoration: underline;
-  cursor: pointer;
 }
 
 .info-link:hover {
-  color: #ff5fa6; /* hồng gradient tone website của bạn */
+  color: #ff5fa6;
 }

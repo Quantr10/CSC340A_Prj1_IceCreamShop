@@ -27,7 +27,7 @@
 .menu-price {
   font-weight: bold;
   font-size: 0.9rem;
-  color: rgba(104, 50, 146, 1); /* Purple */
+  color: rgba(104, 50, 146, 1);
 }
 
 .menu-btn {
@@ -43,7 +43,7 @@
 
 .menu-btn:hover {
   transform: scale(1.05);
-  background-color: #ff477e; /* slightly darker pink */
+  background-color: #ff477e;
 }
 
 .menu-stars {

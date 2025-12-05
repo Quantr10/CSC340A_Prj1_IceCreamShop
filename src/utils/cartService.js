@@ -12,16 +12,12 @@ import { getAuth } from "firebase/auth";
 
 const auth = getAuth();
 
-// ===============================
-//  ADD TO CART (AUTO: FIREBASE OR LOCAL)
-// ===============================
+//  ADD TO CART
 export async function addToCartService(cartItem) {
   const user = auth.currentUser;
 
   if (user) {
-    // ===============================
-    //  MODE 1 — LOGGED IN → FIREBASE
-    // ===============================
+    // MODE 1 — LOGGED IN → FIREBASE
     const cartRef = collection(db, "users", user.uid, "cart");
 
     const q = query(
@@ -35,7 +31,6 @@ export async function addToCartService(cartItem) {
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      // Item exists → update quantity
       const existing = snapshot.docs[0];
       await updateDoc(doc(db, "users", user.uid, "cart", existing.id), {
         quantity: existing.data().quantity + cartItem.quantity,
@@ -44,13 +39,10 @@ export async function addToCartService(cartItem) {
       return { updated: true };
     }
 
-    // New item
     await addDoc(cartRef, cartItem);
     return { created: true };
   } else {
-    // ===============================
-    //  MODE 2 — NOT LOGGED IN → LOCAL STORAGE
-    // ===============================
+    // MODE 2 — NOT LOGGED IN → LOCAL STORAGE
     let localCart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const found = localCart.find(
@@ -102,12 +94,12 @@ export async function mergeLocalCartToFirebase() {
         quantity: existing.data().quantity + item.quantity,
       });
     } else {
-      const { id, ...cleanItem } = item; // loại bỏ id localStorage
+      const { id, ...cleanItem } = item;
 
       await addDoc(cartRef, cleanItem);
     }
   }
 
-  // Clear localStorage cart after migrating
+  // Clear localStorage cart after merging
   localStorage.removeItem("cart");
 }

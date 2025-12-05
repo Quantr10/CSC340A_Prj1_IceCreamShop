@@ -18,7 +18,7 @@
 
 .auth-right {
   flex: 1;
-  background-color: #FFC107; /* Fallback color */
+  background-color: #FFC107;
   position: relative;
   display: flex;
   justify-content: center;
