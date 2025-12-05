@@ -1,0 +1,109 @@
+/* ===========================
+   PAGE LAYOUT
+=========================== */
+.checkout-page {
+  background-color: #fff;
+}
+
+.checkout-header {
+  background: linear-gradient(135deg, hotpink, #683292);
+  padding: 3rem 0;
+  margin: 0;
+}
+
+.checkout-title {
+  color: #fff;
+  font-size: 2.3rem;
+}
+
+/* ===========================
+   PAYMENT OPTION
+=========================== */
+.payment-option {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.payment-option.active {
+  border-color: #ff4da0 !important;
+  background: #ffe6f3;
+}
+
+/* ===========================
+   CUSTOM RADIO
+=========================== */
+.custom-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #888;
+  display: inline-block;
+  transition: 0.2s;
+  position: relative;
+}
+
+.custom-radio.checked {
+  border-color: #ff4da0;
+}
+
+.custom-radio.checked::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #ff4da0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ===========================
+   CREDIT CARD ICONS
+=========================== */
+.cc-icons .cc-icon {
+  font-size: 1.7rem;
+  opacity: 0.85;
+  transition: 0.2s;
+}
+
+.visa {
+  color: #1a1f71;
+}
+
+.mastercard {
+  color: #ff5f00;
+}
+
+.amex {
+  color: #2e77bb;
+}
+
+.discover {
+  color: #f58220;
+}
+
+/* ===========================
+   ORDER BUTTON
+=========================== */
+.place-order-btn {
+  background: #ff4da0;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: 0.25s;
+}
+
+.place-order-btn:hover {
+  transform: translateY(-2px);
+    background: #ff2d8a;
+
+}
+
+/* Pink highlight */
+.text-pink {
+  color: #ff4da0;
+}

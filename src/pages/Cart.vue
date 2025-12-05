@@ -1,7 +1,7 @@
 <template>
   <div class="cart-page">
     <div class="cart-header text-center">
-      <h1 class="cart-title">Your Cart</h1>
+      <h1 class="cart-title">Cart</h1>
     </div>
 
     <div class="container py-4">
@@ -136,7 +136,7 @@
           </div>
 
 <button class="checkout-btn" @click="handleCheckout">
-  Checkout
+  Check Out
 </button>
         </div>
       </div>
