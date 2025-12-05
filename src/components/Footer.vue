@@ -16,10 +16,11 @@
               <div class="col-5">
                 <router-link to="/" class="nav-link d-block">Home</router-link>
                 <router-link to="/menu" class="nav-link d-block">Menu</router-link>
+                <router-link to="/faq" class="nav-link d-block">FAQ</router-link>
               </div>
               <div class="col-7">
-                <router-link to="/faq" class="nav-link d-block">FAQ</router-link>
                 <router-link to="/contact" class="nav-link d-block">Contact</router-link>
+                <router-link to="/cart" class="nav-link d-block">Cart</router-link>
               </div>
             </div>
           </nav>
