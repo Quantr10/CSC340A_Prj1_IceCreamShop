@@ -18,6 +18,7 @@
               <font-awesome-icon icon="star" v-for="n in 5" :key="n"
                 :class="n <= Math.round(avgRating) ? '' : 'text-muted-light'" />
               <span class="text-muted ms-2">({{ avgRating }}/5)</span>
+              <span class="text-muted small ms-1">({{ reviews.length }} reviews)</span>
             </div>
           </div>
 
@@ -25,8 +26,7 @@
           <h3 class="product-price text-purple fw-bold mb-3">${{ price }}</h3>
 
           <p class="text-muted mb-4">
-            This is a delicious ice cream flavor freshly made with premium
-            ingredients.
+            {{ item?.description || 'This is a delicious ice cream flavor freshly made with premium ingredients.' }}
           </p>
 
           <div class="mb-4 option-row">
@@ -100,12 +100,10 @@
           <hr />
 
           <div class="extra-info mt-3">
-
             <div class="info-item d-flex align-items-center mb-2">
               <font-awesome-icon icon="box-open" class="info-icon me-2" />
-              <span>Free In=state Shipping on All Orders Over $50</span>
+              <span>Free In-state Shipping on All Orders Over $50</span>
             </div>
-
             <div class="info-item d-flex align-items-center">
               <font-awesome-icon icon="clock" class="info-icon me-2" />
               <span>
@@ -113,7 +111,6 @@
                 <a href="#" class="info-link">Terms & Conditions</a>
               </span>
             </div>
-
           </div>
 
         </div>
@@ -181,8 +178,7 @@
         <div class="tab-content text-muted small lh-lg">
           <div v-if="activeTab === 'description'">
             <p>
-              Enjoy premium-quality ice cream made fresh daily with natural
-              ingredients.
+              {{ item?.description || 'Enjoy premium-quality ice cream made fresh daily with natural ingredients.' }}
             </p>
           </div>
 
@@ -229,35 +225,33 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { nextTick } from "vue";
-
 import { useRoute } from "vue-router";
 import { db } from "@/firebase.js";
 import {
   collection,
   getDocs,
   doc,
-  updateDoc,
-  arrayUnion,
+  getDoc,
+  query,
+  where,
+  orderBy,
+  addDoc,
+  setDoc,
+  serverTimestamp
 } from "firebase/firestore";
 import IceCreamCard from "../components/IceCreamCard.vue";
 import "../assets/ProductDetail.css";
 import { toast } from "vue3-toastify";
 import { addToCartService } from "../utils/cartService";
-
+import { sampleFlavors } from "../utils/seed.js";
 
 const route = useRoute();
 const flavorName = route.params.name;
 
-// Helper to match slug from URL with database names
 function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-");
+  return text.toString().toLowerCase().replace(/\s+/g, "-");
 }
 
-// Helper to display pretty name from slug while loading
 const displayFlavorName = computed(() => {
   if (!flavorName) return "";
   return flavorName
@@ -283,24 +277,76 @@ function getImageUrl(filename) {
   return new URL(`../images/${filename}`, import.meta.url).href;
 }
 
-async function fetchFlavor() {
-  const snapshot = await getDocs(collection(db, "flavors"));
-  snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    if (slugify(data.name) === flavorName) {
-      item.value = { id: docSnap.id, ...data };
-      image.value = getImageUrl(data.image);
-      price.value = data.price;
-      avgRating.value = data.rating || 0;
-      reviews.value = data.reviews || [];
-    }
-  });
+// 1. Load static product data
+function loadStaticData() {
+  const found = sampleFlavors.find(f => slugify(f.name) === flavorName);
+  
+  if (found) {
+    // Mock an ID for cart compatibility using the slug
+    const fakeId = slugify(found.name);
+    item.value = { id: fakeId, ...found };
+    image.value = getImageUrl(found.image);
+    price.value = found.price;
+    avgRating.value = found.rating || 0;
+    // Don't load static reviews if we want dynamic ones
+  }
 }
 
+// 2. Load dynamic ratings/reviews from Firestore
+async function loadRealStats() {
+  try {
+    const slug = flavorName;
+    
+    // Fetch Avg Rating from product_stats
+    const statsRef = doc(db, "product_stats", slug);
+    const statsSnap = await getDoc(statsRef);
+    
+    if (statsSnap.exists()) {
+      const data = statsSnap.data();
+      avgRating.value = data.avgRating;
+    }
+
+    // Fetch Reviews from reviews collection
+    const q = query(
+      collection(db, "reviews"), 
+      where("productId", "==", slug),
+      orderBy("createdAt", "desc") // Requires index, but simpler for now
+    );
+    
+    try {
+        const reviewSnap = await getDocs(q);
+        reviews.value = reviewSnap.docs.map(d => d.data());
+    } catch (e) {
+        // Fallback if no index
+        const q2 = query(collection(db, "reviews"), where("productId", "==", slug));
+        const reviewSnap2 = await getDocs(q2);
+        reviews.value = reviewSnap2.docs.map(d => d.data());
+    }
+
+  } catch (error) {
+    console.error("Error loading stats:", error);
+  }
+}
+
+const relatedItems = ref([]);
+async function fetchRelated() {
+  relatedItems.value = sampleFlavors
+    .map((data) => ({ id: slugify(data.name), ...data }))
+    .filter((i) => slugify(i.name) !== flavorName)
+    .slice(0, 3);
+}
+
+function formatDate(dateIso) {
+  if (!dateIso) return "";
+  return new Date(dateIso).toLocaleDateString();
+}
+
+// --- INLINE RATING LOGIC ---
 const userRating = ref(0);
 const firstName = ref("");
 const lastName = ref("");
 const userReview = ref("");
+const isSubmitting = ref(false);
 
 function setUserRating(n) {
   userRating.value = n;
@@ -312,63 +358,61 @@ async function submitInlineReview() {
     return;
   }
 
-  const review = {
-    user: `${firstName.value || "Anonymous"} ${lastName.value || ""}`.trim(),
-    stars: userRating.value,
-    text: userReview.value,
-    createdAt: new Date().toISOString(),
-  };
+  isSubmitting.value = true;
 
-  const docRef = doc(db, "flavors", item.value.id);
+  try {
+    const slug = flavorName;
+    const fullName = `${firstName.value || "Anonymous"} ${lastName.value || ""}`.trim();
 
-  const oldCount = reviews.value.length;
-  const oldAvg = Number(avgRating.value);
-  const newAvg = Number(
-    ((oldAvg * oldCount + userRating.value) / (oldCount + 1)).toFixed(1)
-  );
+    // 1. Add Review to Firestore
+    const reviewData = {
+      productId: slug,
+      user: fullName,
+      stars: userRating.value,
+      text: userReview.value,
+      createdAt: new Date().toISOString() 
+    };
 
-  await updateDoc(docRef, {
-    reviews: arrayUnion(review),
-    rating: newAvg,
-  });
+    await addDoc(collection(db, "reviews"), reviewData);
 
-  reviews.value.unshift(review);
-  avgRating.value = newAvg;
+    // 2. Recalculate Average (optimistic update for speed, or re-fetch)
+    // We will re-fetch all reviews to be accurate
+    const q = query(collection(db, "reviews"), where("productId", "==", slug));
+    const snapshot = await getDocs(q);
+    
+    let totalStars = 0;
+    snapshot.forEach(doc => {
+      totalStars += doc.data().stars;
+    });
+    
+    const count = snapshot.size;
+    const newAvg = Number((totalStars / count).toFixed(1));
 
-  await nextTick();
+    // 3. Update Product Stats
+    await setDoc(doc(db, "product_stats", slug), {
+      avgRating: newAvg,
+      reviewCount: count,
+      lastUpdated: serverTimestamp()
+    });
 
-  userRating.value = 0;
-  firstName.value = "";
-  lastName.value = "";
-  userReview.value = "";
+    // 4. Update Local State immediately
+    reviews.value.unshift(reviewData);
+    avgRating.value = newAvg;
 
-  toast("Thank you for your review!");
-}
+    toast("Review submitted successfully!");
 
-const relatedItems = ref([]);
-async function fetchRelated() {
-  const snapshot = await getDocs(collection(db, "flavors"));
-  relatedItems.value = snapshot.docs
-    .map((doc) => ({ id: doc.id, ...doc.data() }))
-    .filter((i) => slugify(i.name) !== flavorName)
-    .slice(0, 3);
-}
+    // Reset form
+    userRating.value = 0;
+    firstName.value = "";
+    lastName.value = "";
+    userReview.value = "";
 
-function formatDate(dateIso) {
-  return new Date(dateIso).toLocaleDateString();
-}
-
-function resetSelections() {
-  selectedSize.value = null;
-  selectedServing.value = null;
-  selectedTopping.value = null;
-  qty.value = 1;
-
-  // reset rating form nếu muốn
-  userRating.value = 0;
-  firstName.value = "";
-  lastName.value = "";
-  userReview.value = "";
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    toast("Failed to submit review.");
+  } finally {
+    isSubmitting.value = false;
+  }
 }
 
 async function addToCart() {
@@ -378,12 +422,11 @@ async function addToCart() {
   }
 
   const cartItem = {
-    flavorId: item.value.id,
+    flavorId: item.value.id, 
     name: item.value.name,
     image: item.value.image,
     price: price.value,
     quantity: qty.value,
-
     size: selectedSize.value,
     style: selectedServing.value,
     topping: selectedTopping.value,
@@ -391,24 +434,33 @@ async function addToCart() {
 
   try {
     const result = await addToCartService(cartItem);
-
-    if (result.updated) {
-      toast("Updated quantity in cart!");
-    } else {
-      toast("Added new item to cart!");
-    }
-
-    resetSelections();
-
+    if (result.updated) toast("Updated quantity in cart!");
+    else toast("Added new item to cart!");
+    
+    selectedSize.value = null;
+    selectedServing.value = null;
+    selectedTopping.value = null;
+    qty.value = 1;
   } catch (error) {
     console.error(error);
     toast("Failed to add to cart.");
   }
 }
 
-
 onMounted(async () => {
-  await fetchFlavor();
+  loadStaticData();
+  await loadRealStats();
   await fetchRelated();
 });
 </script>
+
+<style scoped>
+.btn-outline-pink {
+    color: #ff8fa3;
+    border-color: #ff8fa3;
+}
+.btn-outline-pink:hover {
+    background-color: #ff8fa3;
+    color: white;
+}
+</style>
